@@ -1,0 +1,41 @@
+version: "3.3"
+services:
+  # db:
+  #   image: postgres:12.2
+  #   ports:
+  #     - "5423:5432"
+  #   volumes:
+  #     - ./db_data:/var/lib/postgresql/data
+  #   env_file:
+      # - .env
+  telegram:
+    build: .
+    command: bash -c "exe/chatgpt_bot telegram"
+    volumes:
+      - .:/chatgpt_assistant
+    environment:
+      POSTGRES_HOST: db
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+    # depends_on:
+    #   - db
+  discord:
+    build: .
+    command: bash -c "exe/chatgpt_bot discord"
+    volumes:
+      - .:/chatgpt_assistant
+    environment:
+      POSTGRES_HOST: db
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+    # depends_on:
+    #   - db
+volumes:
+  postgres:
+networks:
+  athenas_lab:
+    external: true

@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../lib/chatgpt_assistant"
+
+puts "Starting Chatgpt Assistant"
+puts "Bot Type: #{ARGV[0]}"
+puts "Mode: #{ENV["MODE"]}"
+case ARGV[0]
+when "telegram"
+  ChatgptAssistant::Main.new("telegram").start
+when "discord"
+  ChatgptAssistant::Main.new("discord").start
+when "migrate"
+  ChatgptAssistant::Config.new.migrate
+end

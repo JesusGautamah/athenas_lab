@@ -1,0 +1,56 @@
+version: "3.3"
+services:
+  redis:
+    image: redis:6.2.1-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data:/data
+    command: redis-server
+    networks:
+      - athenas_lab
+  db:
+    image: postgres
+    ports: 
+      - "5432:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && foreman start -f Procfile.dev"
+    volumes:
+      - .:/athenas_lab
+    ports:
+      - "80:80"
+    depends_on:
+      - redis
+      - db
+      - sidekiq
+    env_file:
+      - .env
+    tty: true
+    networks:
+      - athenas_lab
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/athenas_lab
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+volumes:
+  redis:
+  postgres:
+networks:
+  athenas_lab:
+    name: athenas_lab

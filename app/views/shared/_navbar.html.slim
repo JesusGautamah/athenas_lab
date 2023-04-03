@@ -1,0 +1,39 @@
+/  a simple copy of github navigation with tailwindcss and slim template, use _ as separator
+
+.navbar
+  .container
+    .navbar-brand
+      .navbar-item
+        /  use tailwindcss to style and dimension the image
+        =image_tag('athenas_logo', class: 'h-12')
+      .navbar-burger.burger(data-target="navbarMenu")
+        span
+        span
+        span
+    #navbarMenu.navbar-menu
+      .navbar-start
+        a.navbar-item(href="#" class="is-active")
+          | Bots
+      .navbar-end
+        .navbar-item
+          .field.is-grouped
+            - unless user_signed_in?
+              p.control
+                a.button.is-primary(href="/users/sign_in")
+                  span.icon
+                    i.fa.fa-user
+                  span
+                    | Login
+              p.control
+                a.button.is-light(href="/users/sign_up")
+                  span.icon
+                    i.fa.fa-user-plus
+                  span
+                    | Register
+            - if user_signed_in?
+              p.control
+                a.button.is-light(href="/users/sign_out")
+                  span.icon
+                    i.fa.fa-github
+                  span
+                    | Logout
