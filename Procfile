@@ -1,2 +1,2 @@
-web: bin/rails server -b 0.0.0.0 -p 80
+web: bin/rails server
 worker: bundle exec sidekiq -C config/sidekiq.yml
