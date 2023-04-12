@@ -20,15 +20,6 @@ class Visitor < ActiveRecord::Base
   end
 end
 
-# VisitorActions model
-class VisitorAction < ActiveRecord::Base
-  belongs_to :visitor
-  validates :action, presence: true
-  validates :description, presence: true
-  validates :role, presence: true
-  enum role: { user: 0, assistant: 1, warning: 2 }
-end
-
 # User model
 class User < ActiveRecord::Base
   attr_accessor :password
