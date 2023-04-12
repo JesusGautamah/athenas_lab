@@ -47,8 +47,8 @@ module ChatgptAssistant
     def migrate
       db_connection
       ActiveRecord::Base.logger = Logger.new($stdout)
+      VisitorMigration.new.migrate(:up)
       UserMigration.new.migrate(:up)
-      UserActionsMigration.new.migrate(:up)
       ChatMigration.new.migrate(:up)
       MessageMigration.new.migrate(:up)
       ErrorMigration.new.migrate(:up)
