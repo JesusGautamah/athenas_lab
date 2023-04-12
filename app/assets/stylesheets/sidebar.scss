@@ -1,0 +1,20 @@
+  /* colors */
+  $primary-neutral-color: #000;
+  $primary-color: #bd2b61;
+  $secondary-color: #3f51b5;
+  $tertiary-color: #fca311;
+  $quaternary-color: #e5e5e5;
+  $quinary-color: #ddd;
+  $background-color: #222121;
+  $primary-text-color: #fff;
+
+  aside.sidebar {
+    background-color: #000;
+    color: $primary-text-color;
+  }
+
+  @media (max-width: 768px) {
+    aside.sidebar {
+      display: none;
+    }
+  }

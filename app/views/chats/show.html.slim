@@ -1,10 +1,24 @@
-p style="color: green" = notice
+.card.mb-2.rounded
+  .card-header
+    .card-header-title
+      == render @chat
+      hr/
+      br/
+      - if  @messages.any?
+        = will_paginate @messages
 
-== render @chat
+- @messages.each_with_index do |message, index|
+  == render message, index: index
+  
+- if @messages.any?
+  .card.mb-2.rounded.px-5.py-3.card-page-title
+    .card-header
+      .card-header-title
+        = will_paginate @messages
 
-div
-  => link_to "Edit this chat", edit_chat_path(@chat)
-  '|
-  =< link_to "Back to chats", chats_path
-
-  = button_to "Destroy this chat", @chat, method: :delete
+div.my-4  
+  => link_to "Edit this chat", edit_chat_path(@chat),  class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700" if @chat.user == current_user
+  =< link_to "Back to chats", chats_path,  class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
+  br/
+  br/
+  = button_to "Destroy this chat", @chat, method: :delete, data: { confirm: "Are you sure?" },  class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700" if @chat.user == current_user

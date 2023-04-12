@@ -1,11 +1,26 @@
-p style="color: green" = notice
 
-h1 Chats
+.card.mb-2.rounded.px-5.py-3
+  .card-header
+    .card-header-title
+      h1 Chats
+      hr/
+      br/
 
 #chats
   - @chats.each do |chat|
-    == render chat
-    p
-      = link_to "Show this chat", chat
+    .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+      .card-header
+        .card-header-title
+          = link_to chat.title, chat
+      .card-content
+        .content
+          == markdown(chat.messages.last.content.truncate(100)) if chat.messages.any?
+        br/
+        .card-content.text-center
+          span.text-white =chat.messages.count
+          | &nbsp;
+          i.fas.fa-comments.text-white.mr-2
 
-= link_to "New chat", new_chat_path
+          = link_to "view", chat, class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
+= will_paginate @chats
+= link_to "New chat", new_chat_path, class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"

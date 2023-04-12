@@ -1,0 +1,13 @@
+.card.mb-2.rounded.px-5.py-3.card-page-title
+  .card-header
+    .card-header-title
+      h1 Editing Message
+.card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
+  .card-header
+    .card-header-title.text-white
+      == render "form", message: @message
+      br/
+      div
+        => link_to "Show this message", @message
+        '|
+        =< link_to "Back to chat", @message.chat

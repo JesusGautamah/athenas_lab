@@ -1,0 +1,19 @@
+div id="#{dom_id message}"
+.card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.text-left.card-message
+  .card-header
+    .card-header-title.grid.grid-cols-2
+      .text-left
+        a(href="#{message_path(message)}")
+         strong =< message.role == "user" ? "#{message.chat.user.name}: " : "#{message.role}: "
+      .text-right
+        span.text-white
+            =< index + 1 if !index&.nil?
+            =< message.created_at.strftime("%d/%m/%Y %H:%M") unless index
+  .card-content
+    .content
+      == markdown(message.content)
+      br/
+  
+- if message.user == current_user
+  = render partial: "messages/buttons", locals: { message: message }
+

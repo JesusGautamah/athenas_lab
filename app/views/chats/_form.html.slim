@@ -5,18 +5,18 @@
       ul
         - @chat.errors.each do |error|
           li = error.full_message
-
-  div
-    = form.label :user_id, style: "display: block"
-    = form.text_field :user_id
-
-  div
-    = form.label :status, style: "display: block"
-    = form.number_field :status
-
   div
     = form.label :title, style: "display: block"
     = form.text_field :title
+  div
+    =form.label :public, style: "display: block"
+    = form.check_box :public
+  div
+    = form.label :actor
+    = form.select :actor, options_for_select(@awesome_chatgpt_actors)
+  div
+    = form.label :language
+    = form.select :language, options_for_select(@languages)
 
   div
     = form.submit

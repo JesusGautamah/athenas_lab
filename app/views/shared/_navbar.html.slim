@@ -1,39 +1,52 @@
-/  a simple copy of github navigation with tailwindcss and slim template, use _ as separator
-
-.navbar
+nav.navbar.shadow.mb-4.py-1.border.border-gray-950.border-b-gray-700 
   .container
-    .navbar-brand
-      .navbar-item
-        /  use tailwindcss to style and dimension the image
-        =image_tag('athenas_logo', class: 'h-12')
-      .navbar-burger.burger(data-target="navbarMenu")
-        span
-        span
-        span
-    #navbarMenu.navbar-menu
-      .navbar-start
-        a.navbar-item(href="#" class="is-active")
-          | Bots
-      .navbar-end
-        .navbar-item
-          .field.is-grouped
-            - unless user_signed_in?
-              p.control
-                a.button.is-primary(href="/users/sign_in")
-                  span.icon
-                    i.fa.fa-user
-                  span
-                    | Login
-              p.control
-                a.button.is-light(href="/users/sign_up")
-                  span.icon
-                    i.fa.fa-user-plus
-                  span
-                    | Register
-            - if user_signed_in?
-              p.control
-                a.button.is-light(href="/users/sign_out")
-                  span.icon
-                    i.fa.fa-github
-                  span
-                    | Logout
+    div.flex.items-center
+      a(href="/")
+        = image_tag('athenas_logo', class: 'h-12 mr-4')
+      div.flex.items-center
+        div.relative.mr-4
+          input.h-10.w-64.pl-2.pr-8.rounded.border.border-gray-300.focus_border-black(type="text" name="search" placeholder="Search or jump to...")
+          button.absolute.right-0.top-0.mt-3.mr-3(type="submit")
+            i.fas.fa-search
+      div.flex.items-center
+        a.hover_text-white.py-2.block(href="/") Home
+        | &nbsp;
+        - if user_signed_in?
+          a.hover_text-white.py-2.block(href="/users/edit") Profile
+          | &nbsp;
+          a.hover_text-white.py-2.block(href="/chats") Chats
+          | &nbsp;
+          a.hover_text-white.py-2.block(href="/users/sign_out") Sign Out
+        - else
+          a.hover_text-white.py-2.block(href="/users/sign_in") Sign In
+          | &nbsp;
+          a.hover_text-white.py-2.block(href="/users/sign_up") Sign Up
+
+      div#notifications
+        button#notifications_button.py-2.px-3.rounded.text-white(type="button")
+          i.fas.fa-bell
+        div#notifications_dropdown.absolute.right-0.top-0.mt-12.w-64.h-64.overflow-y-auto.bg-gray-900.rounded.shadow-lg.hidden
+          div#notifications_list
+            / div#notifications_list_item.py-2.px-3.border.border-gray-950.border-t-0.hover_bg-gray-700
+            /   a(href="/") Notification 1
+            / div#notifications_list_item.py-2.px-3.border.border-gray-950.border-t-0.hover_bg-gray-700
+            /   a(href="/") Notification 2
+      div#profile
+        button#profile_image_button.py-2.px-3.rounded-full.text-white(type="button")
+          / = image_tag(current_user.avatar_url, class: 'h-8 w-8 rounded-full')
+          = image_tag("avatar.png", class: "h-8 w-8 rounded-full object-cover")
+        div#profile_image_dropdown.absolute.right-0.top-0.mt-12.w-64.h-64.overflow-y-auto.bg-gray-900.rounded.shadow-lg.hidden
+          div#profile_image_list
+            div#profile_image_list_item.py-2.px-3.border.border-gray-950.border-t-0.hover_bg-gray-700
+              a(href="/users/edit") Profile
+            div#profile_image_list_item.py-2.px-3.border.border-gray-950.border-t-0.hover_bg-gray-700
+              a(href="/users/sign_out") Sign Out
+    
+aside.sidebar.w-64.h-full.fixed.top-0.left-0.py-4.pl-4.text-center.shadow-lg.xsm_hidden
+  div#search_chat_or_repository_select
+    div.relative.mt-12.mr-4
+      select.h-10.w-5/6.pl-2.pr-8.rounded.mb-2.border-gray-300(name="search" placeholder="Search a research... ")
+        option(value="repo") repository
+        option(value="chat") chat
+      input.h-10.w-5/6.pl-2.pr-8.rounded.border-gray-300(type="text" name="search" placeholder="Type your search... ")
+  

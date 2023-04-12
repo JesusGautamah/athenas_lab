@@ -13,5 +13,7 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 80
 EXPOSE 5432
 
+#
+
 # Configure the main process to run when running the image
 CMD ["rails", "server", "-b", "0.0.0.0"]

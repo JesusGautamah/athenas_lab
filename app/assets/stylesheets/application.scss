@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+
+/* colors */
+$primary-neutral-color: #000;
+$primary-color: #bd2b61;
+$secondary-color: #3f51b5;
+$tertiary-color: #fca311;
+$quaternary-color: #e5e5e5;
+$quinary-color: #ddd;
+$background-color: #222121;
+$primary-text-color: #fff;
+
+body {
+  background-color:  #333333;
+  color: $primary-text-color;
+}
+
+main {
+  margin-left: 16rem;
+  padding: 1rem;
+  z-index: 1
+
+  
+}
+
+// margin left 0 on small screens scss
+@media screen and (max-width: 768px) {
+  main {
+    margin-left: 0;
+    padding: 1rem;
+    z-index: 1
+  }	
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#notify-bubble {
+  background-color: $primary-color;
+  color: $primary-color;
+}
+
+#notify-text {
+  color: $primary-color;
+}

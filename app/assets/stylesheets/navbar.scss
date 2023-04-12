@@ -1,0 +1,33 @@
+  /* colors */
+  $primary-neutral-color: #000;
+  $primary-color: #bd2b61;
+  $secondary-color: #3f51b5;
+  $tertiary-color: #fca311;
+  $quaternary-color: #e5e5e5;
+  $quinary-color: #ddd;
+  $background-color: #222121;
+  $primary-text-color: #fff;
+
+  nav {
+    background-color:  #bd2b61;
+    height: 60px; 
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000;
+  }
+
+  #notifications {
+    position: absolute;
+    right: 70px;
+    z-index: 1000;
+    // color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+
+  #profile {
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    background-color: transparent;
+  }

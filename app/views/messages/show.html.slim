@@ -1,0 +1,10 @@
+== render @message, index: 0
+- if @message.gen_images.any?
+  == render "messages/images", message: @message
+  
+- if @message.keywords.any?
+  == render "messages/keywords", message: @message
+
+- if @message.message_corrections.any?
+  == render "messages/correction", message: @message
+br/
