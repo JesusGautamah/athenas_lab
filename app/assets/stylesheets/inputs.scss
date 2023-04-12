@@ -1,0 +1,89 @@
+ /* colors */
+ $primary-neutral-color: #000;
+ $primary-color: #bd2b61;
+ $primary-color-var: #df3d78;
+ $secondary-color: #3f51b5;
+ $tertiary-color: #fca311;
+ $quaternary-color: #e5e5e5;
+ $quinary-color: #ddd;
+ $background-color: #222121;
+ $primary-text-color: #fff;
+
+ input[type="text"] {
+   background-color: $primary-neutral-color;
+   color: $primary-text-color;
+ }
+
+  input[type="email"] {
+    background-color: $primary-neutral-color;
+    color: $primary-text-color;
+  }
+
+ input[type="password"] {
+   background-color: $primary-neutral-color;
+   color: $primary-text-color;
+ }
+
+  input[type="password-confirmation"] {
+    background-color: $primary-neutral-color;
+    color: $primary-text-color;
+  }
+
+ input[type="checkbox"] {
+   background-color: $primary-neutral-color;
+   color: $primary-text-color;
+ }
+
+ input[type="checkbox"]:checked {
+   background-color: $primary-color;
+   color: $primary-color;
+ }
+
+ input[type="radio"] {
+   background-color: $primary-neutral-color;
+   color: $primary-text-color;
+ }
+
+input[type="radio"]:checked {
+  background-color: $primary-color;
+  color: $primary-color;
+}
+
+textarea {
+  background-color: $primary-neutral-color;
+  color: $primary-text-color;
+  width: 100%;
+}
+
+select {
+  background-color: #d3d3d3;
+  color: #000;
+  width: 100%;
+}
+
+select option {
+  background-color: #d3d3d3;
+  color: #000;
+}
+
+select option:hover {
+  background-color: $primary-color;
+  color: $primary-text-color;
+}
+
+select option:active {
+  background-color: $primary-color;
+  color: $primary-text-color;
+}
+
+select option:visited {
+  background-color: $primary-color;
+  color: $primary-text-color;
+}
+
+input[type="text"][name="search"] {
+  background-color: #e0e0e0;
+  color: #000;
+  width: 100%;
+  height: 40px;
+}

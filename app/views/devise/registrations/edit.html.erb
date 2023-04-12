@@ -1,7 +1,26 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="card mb-2 rounded px-5 py-3 card-page-title">
+<div class="card-header">
+  <div class="card-header-title">
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  </div>
+</div>
+</div>
+<div class="card mb-2 border border-gray-700 bg-gray-950 rounded px-5 py-3 card-message">
+  <div class="card-header">
+    <div class="card-header-title">
+    
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div id="user-avatar">
+    <%= image_tag resource.avatar.url, class: "avatar"  if resource.avatar.attached? %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar_param, "Avatar" %> <br>
+    <%= f.file_field :avatar_param %>
+  </div>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -24,7 +43,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %><br><i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
@@ -38,7 +57,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %><br><i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
@@ -52,3 +71,5 @@
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
 <%= link_to "Back", :back %>
+</div>
+</div>

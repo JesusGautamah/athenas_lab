@@ -1,0 +1,33 @@
+ /* colors */
+ $primary-neutral-color: #000;
+ $primary-color: #bd2b61;
+ $primary-color-var: #df3d78;
+ $secondary-color: #3f51b5;
+ $tertiary-color: #fca311;
+ $quaternary-color: #e5e5e5;
+ $quinary-color: #ddd;
+ $background-color: #222121;
+ $primary-text-color: #fff;
+
+ .card-page-title {
+   border-color: $primary-color;
+   background-color: #fff;
+   color: #000 !important;
+   border: 1px solid $primary-color;
+   text-align: center;
+   text-transform: uppercase;
+   font-size: 1em;
+   font-weight: 700;
+ }
+
+ .card-message {
+   border: 1px solid $primary-neutral-color;
+   background-color: #bd2b61;
+   color: #fff;
+ }
+
+ @media screen and (max-width: 768px) {
+  .card-content .content.grid.grid-cols-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+ }

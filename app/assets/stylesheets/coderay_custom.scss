@@ -1,0 +1,500 @@
+.CodeRay {
+  border: 1px solid #{border_color};
+  color: #fff;
+  background-color: #1A1B26;
+  font-size: 1.1rem;
+  padding: 1rem;
+  line-height: 1.5;
+  overflow: auto;
+  font-family: "Inconsolata", "Monaco", "Andale Mono", "Ubuntu Mono", "Consolas", "Courier New", monospace;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0px 0px 10px #000;
+  -webkit-box-shadow: 0px 0px 10px #000;
+  box-shadow: 0px 0px 10px #000;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.CodeRay pre {
+  margin: 0px;
+  overflow: auto;
+  // lets make the coderay box scrollable
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+span.CodeRay {
+  white-space: pre;
+  border: 0px;
+  padding: 2px;
+}
+
+table.CodeRay {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 2px;
+}
+
+table.CodeRay td {
+  padding: 2px 4px;
+  vertical-align: top;
+}
+
+.CodeRay .line-numbers {
+  background-color: #{numbers_background};
+  color: gray;
+  text-align: right;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.CodeRay .line-numbers a {
+  background-color: #{numbers_background} !important;
+  color: gray !important;
+  text-decoration: none !important;
+}
+
+.CodeRay .line-numbers pre {
+  word-break: normal;
+}
+
+.CodeRay .line-numbers a:target {
+  color: blue !important;
+}
+
+.CodeRay .line-numbers .highlighted {
+  color: red !important;
+}
+
+.CodeRay .line-numbers .highlighted a {
+  color: red !important;
+}
+
+.CodeRay span.line-numbers {
+  padding: 0px 4px;
+}
+
+.CodeRay .line {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.CodeRay .code {
+  width: 100%;
+}
+
+pre,
+.code {
+  background-color: #1A1B26;
+  color: #CDD3DE;
+  font-size: 1.1rem;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+.debug {
+  color: #c7c7c7 !important;
+  background: #373b41 !important;
+}
+
+.annotation {
+  color: #8fc13e
+}
+
+.attribute-name {
+  color: #ffcd38
+}
+
+.attribute-value {
+  color: #f50104
+}
+
+.binary {
+  color: #8f9da0
+}
+
+.binary .char {
+  color: #8fc13e
+}
+
+.binary .delimiter {
+  color: #8fc13e
+}
+
+.char {
+  color: #f50104
+}
+
+.char .content {
+  color: #f50104
+}
+
+.char .delimiter {
+  color: #8fc13e
+}
+
+.class {
+  color: #5e5cac;
+  font-weight: bold
+}
+
+.class-variable {
+  color: #ffcd38
+}
+
+.color {
+  color: #8fc13e
+}
+
+.comment {
+  color: #5e5cac
+}
+
+.comment .char {
+  color: #8f9da0
+}
+
+.comment .delimiter {
+  color: #8f9da0
+}
+
+.constant {
+  color: #ffcd38;
+  font-weight: bold
+}
+
+.decorator {
+  color: #10a6ab
+}
+
+.definition {
+  color: #1290bf;
+  font-weight: bold
+}
+
+.delimiter {
+  color: #c7c7c7
+}
+
+.directive {
+  color: #8fc13e;
+  font-weight: bold
+}
+
+.docstring {
+  color: #f50104;
+}
+
+.doctype {
+  color: #15b8ae
+}
+
+.done {
+  text-decoration: line-through;
+  color: gray
+}
+
+.entity {
+  color: #d14;
+  font-weight: bold
+}
+
+.error {
+  color: #fd5b78;
+  background-color: #13232f
+}
+
+.escape {
+  color: #8fc13e
+}
+
+.exception {
+  color: #FF87BA;
+  font-weight: bold
+}
+
+.float {
+  color: #1478a7
+}
+
+.function {
+  color: #5e5cac;
+  font-weight: bold
+}
+
+.function .delimiter {
+  color: #5e5cac
+}
+
+.function .content {
+  color: #8fc13e
+}
+
+.global-variable {
+  color: #d70
+}
+
+.hex {
+  color: #fc98f7
+}
+
+.id {
+  color: #bc8dff;
+  font-weight: bold
+}
+
+.include {
+  color: #ffcd38;
+  font-weight: bold
+}
+
+.inline {
+  background-color: hsla(0, 0%, 0%, 0.2);
+  color: #fff
+}
+
+.inline-delimiter {
+  font-weight: bold;
+  color: #fff
+}
+
+.instance-variable {
+  color: #ffcd38
+}
+
+.integer {
+  color: #00D
+}
+
+.imaginary {
+  color: #f00
+}
+
+.important {
+  color: #f50104
+}
+
+.key {
+  color: #8fc13e
+}
+
+.key .char {
+  color: #ffcd38
+}
+
+.key .delimiter {
+  color: #8f9da0
+}
+
+.keyword {
+  color: #bc8dff;
+  font-weight: bold
+}
+
+.label {
+  color: #ffcd38;
+  font-weight: bold
+}
+
+.local-variable {
+  color: #fff
+}
+
+.map .content {
+  color: #8fc13e
+}
+
+.map .delimiter {
+  color: #5e5cac
+}
+
+.map {
+  background-color: hsla(200, 100%, 50%, 0.06);
+}
+
+.namespace {
+  color: #4dc4ff;
+  font-weight: bold
+}
+
+.octal {
+  color: #fc98f7
+}
+
+.operator {
+  color: #fff;
+} 
+
+.predefined {
+  color: #ffcd38;
+  font-weight: bold
+}
+
+.predefined-constant {
+  color: #f50104
+}
+
+.predefined-type {
+  color: #ffcd38;
+  font-weight: bold
+}
+
+.preprocessor {
+  color: #06B
+}
+
+.pseudo-class {
+  color: #bc8dff;
+  font-weight: bold
+}
+
+.regexp {
+  background-color: hsla(300, 100%, 50%, 0.06);
+}
+
+.regexp .content {
+  color: #8f9da0
+}
+
+.regexp .delimiter {
+  color: #8f9da0
+}
+
+.regexp .modifier {
+  color: #C2C
+}
+
+.reserved {
+  color: #5e5cac;
+  font-weight: bold
+}
+
+.shell {
+  background-color: hsla(120, 100%, 50%, 0.06);
+}
+
+.shell .content {
+  color: #8fc13e
+}
+
+.shell .delimiter {
+  color: #5e5cac
+}
+
+.string {
+  background-color: hsla(0, 100%, 50%, 0.05);
+}
+
+.string .char {
+  color: #8f9da0
+}
+
+.string .content {
+  color: #f50104
+}
+
+.string .delimiter {
+  color: #8f9da0
+}
+
+.string .modifier {
+  color: #f50104
+}
+
+.symbol {
+  color: #ffcd38
+}
+
+.symbol .content {
+  color: #ffcd38
+}
+
+.symbol .delimiter {
+  color: #b48
+}
+
+.tag {
+  color: #0a8;
+  font-weight: bold
+}
+
+.type {
+  color: #bc8dff;
+  font-weight: bold
+}
+
+.value {
+  color: #8fc13e
+}
+
+.variable {
+  color: #5e5cac
+}
+
+.insert {
+  background: hsla(120, 100%, 50%, 0.12)
+}
+
+.delete {
+  background: hsla(0, 100%, 50%, 0.12)
+}
+
+.change {
+  color: #88f;
+  background: #5e5cac
+}
+
+.head {
+  color: #fff;
+  background: #5e5cac
+}
+
+.head .filename {
+  color: white;
+}
+
+.delete .eyecatcher {
+  background-color: hsla(0, 100%, 50%, 0.2);
+  border: 1px solid hsla(0, 100%, 45%, 0.5);
+  margin: -1px;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.insert .eyecatcher {
+  background-color: hsla(120, 100%, 50%, 0.2);
+  border: 1px solid hsla(120, 100%, 25%, 0.5);
+  margin: -1px;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.insert .insert {
+  color: #0c0;
+  background: transparent;
+  font-weight: bold
+}
+
+.delete .delete {
+  color: #f50104;
+  background: transparent;
+  font-weight: bold
+}
+
+.change .change {
+  color: #8fc13e
+}
+
+.head .head {
+  color: #f4f
+}

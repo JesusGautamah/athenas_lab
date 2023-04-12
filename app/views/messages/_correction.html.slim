@@ -1,0 +1,7 @@
+.card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.text-left.card-message
+  .card-header
+    .card-header-title
+      strong Grammar Correction
+      - @message.message_corrections.each do |message_correction|
+        == "#{markdown(JSON.parse(message_correction.content)[0])}"
+      br/

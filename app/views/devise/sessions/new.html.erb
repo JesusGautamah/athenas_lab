@@ -1,4 +1,15 @@
+<div class="card mb-2 rounded px-5 py-3 card-page-title">
+<div class="card-header">
+  <div class="card-header-title">
 <h2>Log in</h2>
+</div>
+</div>
+</div>
+
+<div class="card mb-2 border border-gray-700 bg-gray-950 rounded px-5 py-3 card-message">
+  <div class="card-header">
+    <div class="card-header-title">
+    
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -24,3 +35,7 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+  </div>
+  </div>
+  </div>
+

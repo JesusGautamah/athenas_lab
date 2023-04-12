@@ -35,22 +35,22 @@ module ChatgptAssistant
 
     private
 
-    attr_reader :mode, :config
+      attr_reader :mode, :config
 
-    def telegram_mode?
-      mode == "telegram"
-    end
+      def telegram_mode?
+        mode == "telegram"
+      end
 
-    def telegram_bot
-      TelegramBot.new(config).start
-    end
+      def telegram_bot
+        TelegramBot.new(config).start
+      end
 
-    def discord_mode?
-      mode == "discord"
-    end
+      def discord_mode?
+        mode == "discord"
+      end
 
-    def discord_bot
-      DiscordBot.new(config).start
-    end
+      def discord_bot
+        DiscordBot.new(config).start
+      end
   end
 end

@@ -1,0 +1,8 @@
+.card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.text-left.card-message
+  .card-header
+    .card-header-title
+      strong Generated Images
+      br/
+      - message.gen_images.each do |gen_image|
+        == image_tag(gen_image.gen_image.url, class: "mx-auto") if gen_image.gen_image.attached?
+        br/
