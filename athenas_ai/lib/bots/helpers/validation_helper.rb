@@ -5,8 +5,8 @@ module ChatgptAssistant
   module ValidationHelper
     def valid_for_list_action?
       not_logged_in_message if user.nil?
-      chat_not_found_message if user&.chats&.count&.zero?
-      !user.nil? && user&.chats&.count&.positive?
+      chat_not_found_message if user.chats.count.zero?
+      !user.nil? && user.chats.count.positive?
     end
 
     def chat_if_exists
@@ -24,6 +24,15 @@ module ChatgptAssistant
 
     def discord_voice_bot_connected?
       user && evnt.user.voice_channel && evnt.voice && !chat.nil?
+    end
+
+    def discord_next_action?
+      return true if evnt.channel.type != 1 && evnt.channel.name != "ai-spaces"
+
+      %w[login register start help new_chat sl_chat ask list hist connect disconnect speak].each do |action|
+        return true if evnt.message.content.include?("#{discord_prefix}#{action}")
+      end
+      false
     end
   end
 end

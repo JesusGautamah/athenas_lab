@@ -6,15 +6,14 @@
 
 This Ruby gem provides an easy way to initialize a client for Telegram and Discord bots using the ChatGPT API, audio transcription, IBM Cloud Text to Speech, and AWS Polly, creating an assistant that can answer questions in text and voice and have a conversation with the user.
 
-#### Languages supported currently: en, pt - contributions are welcome!
-You can contribute by adding your language to the DefaultMessages class in lib/chatgpt_assistant/default_messages.rb. You can also add your language to the list of languages in the README.md file.
-Pull request from language/YOUR_LANGUAGE to main, remember to name your pull request as "Add YOUR_LANGUAGE support".
+#### Languages supported currently: en, pt
 
 Other contributions are welcome too!
 Remember to give a star to this repo if you like it!
 ## Requirements
 
-- Ruby > 2.6.0
+- Ruby > 2.6.0 - for the gem who can create bots projects in your machine
+- Ruby 3.2.2 - inside the docker contianer or for run the bots in your machine
 - Docker
 - Docker Compose
 - PostgreSQL
@@ -63,6 +62,11 @@ Remember to edit docker-compose.prod.yml when deploying to production.
 rake compose:up && sudo docker compose run --rm telegram exe/chatgpt_bot migrate
 ```
 
+## Install [Awesome Chatgpt Actors](https://github.com/JesusGautamah/awesome-chatgpt-actors)
+```bash
+rake chatgpt_actors:install
+```
+
 ## Usage
 
 You can start the Docker Compose services required for the gem using the rake tasks provided by the Lucy Dockerunner gem. These tasks include compose:up, compose:down, compose:status, compose:shell, compose:restart, and others listed previously.
@@ -86,29 +90,36 @@ After starting the Docker Compose services, you can use the features of the gem 
 
 ## Discord Bot Commands
 
-- !start - shows the welcome message
-- !help - shows the help message
-- !login email:password - logs in the user
-- !register email:password - registers a new user
-- !list - lists the user created chatbots
-- !sl_chat CHAT TITLE - starts a chat with the chatbot with the given title
-- !new_chat CHAT TITLE - creates a new chatbot with the given title
-- !ask TEXT - sends a text to the chatbot
-- !connect - connects the chat bot to the current channel
-- !disconnect - disconnects the chat bot from the current channel
-- !speak TEXT - sends a text to the chatbot and gets the response in voice
+The discord commands prefix can be changed in the .env file.
+The default prefix is !!
+
+- dgpt!start - shows the welcome message
+- dgpt!help - shows the help message
+- dgpt!login email:password - logs in the user. Remember to use private messages to register or login and share a server with right permissions with the bot to message it.
+- dgpt!register email:password - registers a new user, email is not verfied yet, so you can use any email, the password is encrypted with bcrypt and stored in the database with salt.
+- dgpt!list - lists the user created chatbots
+- dgpt!sl_chat CHAT TITLE - starts a chat with the chatbot with the given title
+- dgpt!new_chat CHAT TITLE - creates a new chatbot with the given title
+- dgpt!ask TEXT - sends a text to the chatbot
 
 ## Telegram Bot Commands
 
 - /start - shows the welcome message
 - /help - shows the help message
-- login/email:password - logs in the user
-- register/email:password - registers a new user
+- login/email:password - logs in the user. Remember to use private messages to register or login.
+- register/email:password - registers a new user, email is not verfied yet, so you can use any email, the password is encrypted with bcrypt and stored in the database with salt. Remember to use private messages to register or login.
 - list - lists the user created chatbots
 - sl_chat/CHAT TITLE - starts a chat with the chatbot with the given title
 - new_chat/CHAT TITLE - creates a new chatbot with the given title
 - TEXT - sends a text to the chatbot
 - VOICE_MESSAGE or AUDIO FILE - sends a voice message to the chatbot and returns the response in voice
+
+## Recommended Actions runner
+
+You can run Github Actions workflows locally using [act](https://github.com/nektos/act)
+
+We recommend Act installation to run Github Actions workflows locally
+as we use it to deploy the bot in a server via ssh.
 
 ## Contributing
 

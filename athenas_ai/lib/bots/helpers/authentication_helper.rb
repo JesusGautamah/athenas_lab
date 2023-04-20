@@ -10,22 +10,23 @@ module ChatgptAssistant
     def telegram_user_auth(email, password, telegram_id)
       return "wrong password" if password.nil?
 
-      return "something went wrong" unless visitor
+      visitor_access = find_visitor(telegram_id: telegram_id)
+      return "something went wrong" unless visitor_access
 
       new_access = find_user(email: email)
       return "user not found" unless new_access
 
       hash = new_access.password_hash
       salt = new_access.password_salt
-      valid_password?(password, hash, salt) ? telegram_user_access(visitor, new_access) : "wrong password"
+      valid_password?(password, hash, salt) ? telegram_user_access(visitor_access, new_access) : "wrong password"
     end
 
     def telegram_user_access(visitor, new_access)
       other_access = where_user(telegram_id: visitor.telegram_id)
-      other_access&.each { |access| access.update(telegram_id: nil) }
-      return new_access.email if new_access.update(telegram_id: visitor.telegram_id)
-
-      "something went wrong"
+      other_access&.each { |access| access.update(telegram_id: nil) } if other_access&.class == Array
+      other_access&.update(telegram_id: nil) if other_access&.class == User
+      new_access.update(telegram_id: visitor.telegram_id)
+      new_access.email
     end
 
     def discord_user_auth(email, password, discord_id)
@@ -40,9 +41,8 @@ module ChatgptAssistant
       other_access = where_user(discord_id: discord_id)
       other_access&.each { |access| access.update(discord_id: nil) }
       user = find_user(email: user_email)
-      return user.email if user.update(discord_id: discord_id)
-
-      "something went wrong"
+      user.update(discord_id: discord_id)
+      user.email
     end
   end
 end
