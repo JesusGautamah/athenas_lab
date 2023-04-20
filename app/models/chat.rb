@@ -15,8 +15,7 @@ class Chat < ApplicationRecord
 
   def first_message
     actor = AwesomeChatgptActors::Actor.new(role: self.actor, language: "pt")
-    self.prompt = actor.with_language(language).prompt
-    message = Message.new(content: prompt, role: "user")
+    message = Message.new(content: actor.prompt, role: "user")
     message.chat = self
     message.save
   end
