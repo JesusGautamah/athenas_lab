@@ -3,7 +3,7 @@
 require "active_record"
 
 # Visitor model
-class Visitor < ActiveRecord::Base
+class Visitor < ApplicationRecord
   has_many :visitor_actions
   validates :name, presence: true
   validates :platform, presence: true
@@ -19,7 +19,7 @@ class Visitor < ActiveRecord::Base
 end
 
 # User model
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   attr_accessor :password
 
   belongs_to :tel_visitor, optional: true, foreign_key: "telegram_id", class_name: "Visitor"
@@ -62,8 +62,7 @@ class User < ActiveRecord::Base
 end
 
 # Chat model
-class Chat < ActiveRecord::Base
-  validates :user_id, presence: true
+class Chat < ApplicationRecord
   validates :status, presence: true
   validates :title, presence: true
 
@@ -80,7 +79,7 @@ class Chat < ActiveRecord::Base
 end
 
 # Message model
-class Message < ActiveRecord::Base
+class Message < ApplicationRecord
   validates :content, presence: true
   enum role: { user: 0, assistant: 1, system: 2 }
 
@@ -88,7 +87,7 @@ class Message < ActiveRecord::Base
 end
 
 # Error model
-class Error < ActiveRecord::Base
+class Error < ApplicationRecord
   validates :message, presence: true
   validates :backtrace, presence: true
 end

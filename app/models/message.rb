@@ -42,9 +42,7 @@ class Message < ApplicationRecord
     questions.save ? true : false
   end
 
-  def user
-    chat.user
-  end
+  delegate :user, to: :chat
 
   private
 

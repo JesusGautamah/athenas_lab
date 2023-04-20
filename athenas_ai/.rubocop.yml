@@ -36,3 +36,9 @@ Layout/IndentationWidth:
 
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/CyclomaticComplexity:
+  Max: 10
