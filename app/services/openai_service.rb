@@ -30,7 +30,7 @@ class OpenaiService
         size: "1024x1024"
       }
     )
-    puts "response: #{response}"
+    Rails.logger.debug { "response: #{response}" }
     response.dig("data", 0, "url")
   end
 

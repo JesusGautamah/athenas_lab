@@ -1,21 +1,31 @@
 # frozen_string_literal: true
 
+# helpers
 require_relative "helpers/messenger_helper"
 require_relative "helpers/authentication_helper"
 require_relative "helpers/visit_helper"
 require_relative "helpers/audio_helper"
-require_relative "helpers/logger_action_helper"
 require_relative "helpers/search_helper"
 require_relative "helpers/validation_helper"
 require_relative "helpers/file_helper"
+
+# jobs
+require_relative "jobs/register_job"
+require_relative "jobs/new_chat_job"
+require_relative "jobs/voice_connect_job"
+
+# services
+require_relative "services/register_service"
+require_relative "services/new_chat_service"
+require_relative "services/voice_connect_service"
+
 module ChatgptAssistant
-  # This class is responsible to contain the shared variables between the bot classes
+  # This class is responsible to contain the shared attributes and methods
   class ApplicationBot
     include MessengerHelper
     include AuthenticationHelper
     include VisitHelper
     include AudioHelper
-    include LoggerActionHelper
     include SearchHelper
     include ValidationHelper
     include FileHelper
@@ -30,7 +40,7 @@ module ChatgptAssistant
       @discord_prefix = @config.discord_prefix
       @database = @config.db_connection
       @mode = @config.mode
-      @commom_messages = default_msg.commom_messages
+      @common_messages = default_msg.common_messages
       @error_messages = default_msg.error_messages
       @success_messages = default_msg.success_messages
       @help_messages = default_msg.help_messages
@@ -38,7 +48,7 @@ module ChatgptAssistant
 
     attr_reader :openai_api_key, :telegram_token, :database, :default_msg,
                 :mode, :config, :discord_token, :discord_client_id,
-                :discord_prefix, :commom_messages, :error_messages, :success_messages,
+                :discord_prefix, :common_messages, :error_messages, :success_messages,
                 :help_messages
     attr_accessor :msg, :evnt, :bot, :audio_url, :visitor, :user, :chat, :chat_id
 

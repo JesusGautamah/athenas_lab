@@ -1,8 +1,8 @@
 FROM ruby:3.2.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client ffmpeg
-WORKDIR /athenas_ai
-COPY Gemfile /athenas_ai/Gemfile
-COPY Gemfile.lock /athenas_ai/Gemfile.lock
+WORKDIR /chatgpt_assistant
+COPY Gemfile /chatgpt_assistant/Gemfile
+COPY Gemfile.lock /chatgpt_assistant/Gemfile.lock
 RUN bundle install
 
 RUN apt-get install -y wget

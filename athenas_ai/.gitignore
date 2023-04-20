@@ -15,3 +15,4 @@
 /voice/ibm*
 /voice/polly*
 /voice/aws*
+/redis_data/*

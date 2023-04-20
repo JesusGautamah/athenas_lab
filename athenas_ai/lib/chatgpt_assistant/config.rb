@@ -44,13 +44,27 @@ module ChatgptAssistant
       ActiveRecord::Base.logger = Logger.new($stdout) if ENV["ENV_TYPE"] == "development"
     end
 
+    def create_db
+      db_connection
+      return if database_exists?
+
+      ActiveRecord::Base.establish_connection(
+        adapter: "postgresql",
+        host: database_host,
+        port: 5432,
+        database: "postgres",
+        username: database_username,
+        password: database_password
+      )
+      ActiveRecord::Base.logger = Logger.new($stdout) if ENV["ENV_TYPE"] == "development"
+      ActiveRecord::Base.connection.create_database(database_name)
+    end
+
     def migrate
       db_connection
-      ActiveRecord::Base.logger = Logger.new($stdout)
+      ActiveRecord::Base.logger = Logger.new($stdout) if ENV["ENV_TYPE"] == "development"
       VisitorMigration.new.migrate(:up)
-      VisitorActionsMigration.new.migrate(:up)
       UserMigration.new.migrate(:up)
-      UserActionsMigration.new.migrate(:up)
       ChatMigration.new.migrate(:up)
       MessageMigration.new.migrate(:up)
       ErrorMigration.new.migrate(:up)
@@ -59,5 +73,11 @@ module ChatgptAssistant
     private
 
       attr_reader :database_host, :database_name, :database_username, :database_password
+
+      def database_exists?
+        ActiveRecord::Base.connection
+      rescue ActiveRecord::NoDatabaseError
+        false
+      end
   end
 end

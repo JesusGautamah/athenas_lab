@@ -16,12 +16,13 @@ module.exports = {
       spacing: {
         '13': '16rem',
         '14': '18rem',
+      },
     },
-  },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/container-queries'),
-  ]
+    plugins: [
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/typography'),
+      require('@tailwindcss/container-queries'),
+    ]
+  }
 }

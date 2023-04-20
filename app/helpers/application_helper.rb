@@ -34,6 +34,6 @@ module ApplicationHelper
       gh_blockcode: true
     }
     markdown_to_html = Redcarpet::Markdown.new(code, options)
-    markdown_to_html.render(text).html_safe
+    markdown_to_html.render(text)
   end
 end

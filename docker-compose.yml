@@ -38,7 +38,7 @@ services:
       - athenas_lab
   sidekiq:
     build: .
-    command: bundle exec sidekiq -C config/sidekiq.yml
+    command: bundle exec sidekiq -C config/sidekiq.yml -q rails_queue
     volumes:
       - .:/athenas_lab
     depends_on:
