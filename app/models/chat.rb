@@ -10,11 +10,11 @@ class Chat < ApplicationRecord
   enum status: { open: 0, closed: 1 }
 
   def load_prompt
-    self.prompt = AwesomeChatgptActors::Actor.new(prompt_type: actor).prompt
+    self.prompt = AwesomeChatgptActors::Actor.new(role: actor, language: "pt").prompt
   end
 
   def first_message
-    actor = AwesomeChatgptActors::Actor.new(prompt_type: self.actor)
+    actor = AwesomeChatgptActors::Actor.new(role: self.actor, language: "pt")
     self.prompt = actor.with_language(language).prompt
     message = Message.new(content: prompt, role: "user")
     message.chat = self
