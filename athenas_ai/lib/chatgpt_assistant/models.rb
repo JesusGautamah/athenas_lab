@@ -2,6 +2,11 @@
 
 require "active_record"
 
+# Application Record
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+
 # Visitor model
 class Visitor < ApplicationRecord
   has_many :visitor_actions

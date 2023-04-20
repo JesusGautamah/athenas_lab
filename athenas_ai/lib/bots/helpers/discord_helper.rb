@@ -22,7 +22,7 @@ module ChatgptAssistant
       when "user not found"
         send_message error_messages[:user_not_found]
       when "wrong password"
-        Rails.logger.debug "wrong password"
+        # Rails.logger.debug "wrong password"
         send_message error_messages[:wrong_password]
       when find_user(email: user_email).email
         send_message success_messages[:user_logged_in]

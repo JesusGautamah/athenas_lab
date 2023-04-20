@@ -88,7 +88,8 @@ module ChatgptAssistant
           @evnt = event
           @user = find_user(discord_id: event.user.id)
           event.respond error_messages[:user_not_logged_in] if user.nil?
-          create_chat_action if user
+          title = event.message.content.split[1..].join(" ")
+          NewChatJob.perform_async(title, user.id, event.channel.id) if user
           "OK"
         end
       end

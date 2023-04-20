@@ -21,8 +21,8 @@ module ChatgptAssistant
       bot.join
       true
     rescue StandardError => e
-      Rails.logger.debug e.message
-      e.backtrace.each { |line| Rails.logger.debug line }
+      # Rails.logger.debug e.message
+      # e.backtrace.each { |line| Rails.logger.debug line }
       false
     end
   end

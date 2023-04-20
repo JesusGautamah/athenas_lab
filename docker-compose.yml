@@ -27,15 +27,11 @@ services:
       - .:/athenas_lab
     ports:
       - "80:80"
-    depends_on:
-      - redis
-      - db
-      - sidekiq
+      # - sidekiq
     env_file:
       - .env
     tty: true
-    networks:
-      - athenas_lab
+
   sidekiq:
     build: .
     command: bundle exec sidekiq -C config/sidekiq.yml -q rails_queue
