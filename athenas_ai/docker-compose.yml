@@ -8,6 +8,8 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     env_file:
       - .env
+    networks:
+      - athenas_lab
   telegram:
     build: .
     command: bash -c "exe/chatgpt_bot telegram"
@@ -17,6 +19,8 @@ services:
       POSTGRES_HOST: db
     env_file:
       - .env
+    networks:
+      - athenas_lab
   discord:
     build: .
     command: bash -c "exe/chatgpt_bot discord"
@@ -26,12 +30,16 @@ services:
       POSTGRES_HOST: db
     env_file:
       - .env
+    networks:
+      - athenas_lab
   redis:
     image: redis:6-alpine
     ports:
       - "6379:6379"
     volumes:
       - ./redis_data:/data
+    networks:
+      - athenas_lab
   sidekiq:
     build: .
     command: bundle exec sidekiq -C ./lib/chatgpt_assistant/sidekiq.yml -r ./lib/chatgpt_assistant/sidekiq.rb -q ruby_queue
@@ -43,6 +51,11 @@ services:
       - .env
     depends_on:
       - redis
+    networks:
+      - athenas_lab
 volumes:
   postgres:
   redis:
+networks:
+  athenas_lab:
+    name: athenas_lab

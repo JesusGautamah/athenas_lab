@@ -9,7 +9,8 @@
   $primary-text-color: #fff;
 
   nav {
-    background-color:  #bd2b61;
+    background-color: rgba(189, 43, 97, 0.6);
+    border-bottom: 1px solid $primary-color;
     height: 60px; 
     position: fixed; 
     top: 0; 
@@ -24,7 +25,7 @@
     // color: $primary-color;
     border: 1px solid $primary-color;
   }
-
+ 
   #profile {
     position: absolute;
     right: 0;

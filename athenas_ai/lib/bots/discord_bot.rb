@@ -9,7 +9,6 @@ module ChatgptAssistant
     def start
       start_event
       login_event
-      # register_event
       list_event
       hist_event
       help_event
