@@ -168,12 +168,12 @@ module ChatgptAssistant
 
         user_audio = transcribe_file(telegram_audio_url)
         message = Message.new(content: user_audio[:text], chat_id: user.current_chat_id, role: "user")
-        raise MessageNotSavedError unless message.save
+        raise MessageNotCreatedError unless message.save
 
         ai_response = telegram_process_ai_voice(user_audio[:file])
         telegram_send_voice_message(voice: ai_response[:voice], text: ai_response[:text])
         delete_file ai_response[:voice]
-      rescue UserNotLoggedInError, NoChatSelectedError, MessageNotSavedError => e
+      rescue UserNotLoggedInError, NoChatSelectedError, MessageNotCreatedError => e
         send_message e.message, msg.chat.id
       end
   end
