@@ -25,12 +25,13 @@ $background-color: #222121;
 $primary-text-color: #fff;
 
 body {
-  background-color:  #333333;
+  background-color:  #111;
   color: $primary-text-color;
 }
 
 main {
-  margin-left: 16rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   padding: 1rem;
   z-index: 1
 }
@@ -55,4 +56,13 @@ main {
 
 #notify-text {
   color: $primary-color;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(189, 43, 97, 0.6);
+  border-top: 1px solid $primary-color;
 }

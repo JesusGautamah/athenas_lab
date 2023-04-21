@@ -7,13 +7,11 @@ div id="#{dom_id message}"
          strong =< message.role == "user" ? "#{message.chat.user.name}: " : "#{message.role}: "
       .text-right
         span.text-white
-            =< index + 1 if !index&.nil?
-            =< message.created_at.strftime("%d/%m/%Y %H:%M") unless index
+            =< message.created_at.strftime("%d/%m/%Y %H:%M")
   .card-content
     .content
       == markdown(message.content)
       br/
-  
-- if message.user == current_user
-  = render partial: "messages/buttons", locals: { message: message }
+      - if message.user == current_user
+        = render partial: "messages/buttons", locals: { message: message }
 

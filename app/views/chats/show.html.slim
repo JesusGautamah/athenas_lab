@@ -5,7 +5,10 @@
       hr/
       br/
       - if  @messages.any?
-        = will_paginate @messages
+        .card.mb-2.rounded.px-5.py-3.card-page-title
+          .card-header
+            .card-header-title.text-white
+              = will_paginate @messages
 
 - @messages.each_with_index do |message, index|
   == render message, index: index
@@ -13,7 +16,7 @@
 - if @messages.any?
   .card.mb-2.rounded.px-5.py-3.card-page-title
     .card-header
-      .card-header-title
+      .card-header-title.text-white
         = will_paginate @messages
 
 div.my-4  

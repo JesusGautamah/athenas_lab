@@ -10,9 +10,9 @@
  $primary-text-color: #fff;
 
  .card-page-title {
-   border-color: $primary-color;
-   background-color: #fff;
-   color: #000 !important;
+   border-color: #fff;
+   background-color: rgba(000, 000, 000, 0.1);
+   color: $primary-color;
    border: 1px solid $primary-color;
    text-align: center;
    text-transform: uppercase;
@@ -21,10 +21,17 @@
  }
 
  .card-message {
-   border: 1px solid $primary-neutral-color;
-   background-color: #bd2b61;
+   border: 1px solid #bd2b61;
+   background-color: rgba(189, 43, 97, 0.1);
    color: #fff;
  }
+
+ .card-message-buttons {
+  border: 1px solid #bd2b61;
+  background-color:  #111;
+  color: #fff;
+}
+
 
  @media screen and (max-width: 768px) {
   .card-content .content.grid.grid-cols-4 {

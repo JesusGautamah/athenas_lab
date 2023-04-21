@@ -22,7 +22,7 @@
             i.fas.fa-comments.text-white.mr-2
 
             = link_to "view", chat, class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
-  #secondary-col.flex-col.w-1/4.fixed.right-8
+  #secondary-col.flex-col.w-1/4.fixed.right-12
     .card.mb-2.rounded
       .card-header
         .card-header-title
@@ -31,13 +31,13 @@
           br/
     - if @public_images&.any?
       - @public_images.each do |image|
-        - next if image[0].nil?
+        - next if image.nil?
         .card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
           .card-header
             .card-header-title.text-white 
-              strong =< image[0].message.chat.title
+              strong =< image.message.chat.title
           .card-content
             .content[style="height: 200px; overflow: hidden;"]
-              a href="#{message_path(image[0].message)}" target="_blank"
-                == image_tag image[0].gen_image.url, class: "w-full" if image[0].gen_image.attached?
+              a href="#{message_path(image.message)}" target="_blank"
+                == image_tag image.gen_image.url, class: "w-full" if image.gen_image.attached?
                 br/

@@ -97,7 +97,6 @@ module ChatgptAssistant
 
       def auth_events
         return login_event if msg.text.include?("login/")
-        # return register_event if msg.text.include?("register/")
         return sign_out_event if msg.text.include?("sign_out/")
       end
 

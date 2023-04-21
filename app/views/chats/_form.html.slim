@@ -1,22 +1,27 @@
-= form_with(model: @chat) do |form|
-  - if @chat.errors.any?
-    div style="color: red"
-      h2 = "#{pluralize(@chat.errors.count, "error")} prohibited this chat from being saved:"
-      ul
-        - @chat.errors.each do |error|
-          li = error.full_message
-  div
-    = form.label :title, style: "display: block"
-    = form.text_field :title
-  div
-    =form.label :public, style: "display: block"
-    = form.check_box :public
-  div
-    = form.label :actor
-    = form.select :actor, options_for_select(@awesome_chatgpt_actors)
-  div
-    = form.label :language
-    = form.select :language, options_for_select(@languages)
+.card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
+  .card-header
+    .card-header-title
+  .card-content
+    .content
+      = form_with(model: @chat) do |form|
+        - if @chat.errors.any?
+          div style="color: red"
+            h2 = "#{pluralize(@chat.errors.count, "error")} prohibited this chat from being saved:"
+            ul
+              - @chat.errors.each do |error|
+                li = error.full_message
+        div
+          = form.label :title, style: "display: block"
+          = form.text_field :title
+        div
+          =form.label :public, style: "display: block"
+          = form.check_box :public
+        div
+          = form.label :actor
+          = form.select :actor, options_for_select(@awesome_chatgpt_actors)
+        div
+          = form.label :language
+          = form.select :language, options_for_select(@languages)
 
-  div
-    = form.submit
+        div
+          = form.submit

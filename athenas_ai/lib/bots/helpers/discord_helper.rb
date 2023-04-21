@@ -22,7 +22,6 @@ module ChatgptAssistant
       when "user not found"
         send_message error_messages[:user_not_found]
       when "wrong password"
-        # Rails.logger.debug "wrong password"
         send_message error_messages[:wrong_password]
       when find_user(email: user_email).email
         send_message success_messages[:user_logged_in]
@@ -81,27 +80,6 @@ module ChatgptAssistant
       user.update(current_chat_id: chat.id) if chat
       send_message success_messages[:chat_selected] if chat
     end
-
-    # def create_chat_action
-    #   title = evnt.message.content.split[1..].join(" ")
-    #   mode = nil
-    #   if title.include? ":"
-    #     mode = title.split(":").last.to_i
-    #     title = title.split(":").first
-    #   end
-    #   actors = AwesomeChatgptActors::CastControl.actors
-    #   return send_message "invalid mode" unless (mode.to_i >= 1 && mode.to_i <= actors.size + 1) || mode.nil?
-    #   return send_message "invalid chat title" if title.blank?
-    #   return send_message "chat title already exists" if user.chat_by_title(title)
-
-    #   actor_name = actors[mode.to_i - 1] if mode
-    #   actor = AwesomeChatgptActors::Actor.new(role: actor_name, language: config.language) if actor_name
-    #   chat = Chat.new(user_id: user.id, status: 0, title: title, actor: actor_name, prompt: actor.prompt) if actor
-    #   chat = Chat.new(user_id: user.id, status: 0, title: title) unless actor
-    #   return send_message "Something went wrong", msg.chat.id unless chat
-
-    #   chat.save ? chat_created_message(chat) : send_message(error_messages[:chat_creation])
-    # end
 
     def answer_action
       response = chatter.chat(message.content, chat.id, error_messages[:something_went_wrong])
