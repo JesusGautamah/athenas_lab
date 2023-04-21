@@ -6,12 +6,12 @@ class ChatsController < ApplicationController
 
   # GET /chats or /chats.json
   def index
-    @chats = current_user.chats.paginate(page: params[:page], per_page: 10)
+    @chats = current_user.chats.paginate(page: params[:page], per_page: 3)
   end
 
   # GET /chats/1 or /chats/1.json
   def show
-    @messages = @chat.messages.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    @messages = @chat.messages.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /chats/new

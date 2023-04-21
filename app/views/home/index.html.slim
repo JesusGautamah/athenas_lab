@@ -7,6 +7,10 @@
           hr/
           br/
     - if @public_chats.any?
+      .card.mb-2.rounded.px-5.py-3.card-page-title
+        .card-header
+          .card-header-title.text-white
+            = will_paginate @public_chats
       - @public_chats.each do |chat|
         .card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
           .card-header
@@ -22,6 +26,10 @@
             i.fas.fa-comments.text-white.mr-2
 
             = link_to "view", chat, class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
+      .card.mb-2.rounded.px-5.py-3.card-page-title
+        .card-header
+          .card-header-title.text-white
+            = will_paginate @public_chats
   #secondary-col.flex-col.w-1/4.fixed.right-12
     .card.mb-2.rounded
       .card-header

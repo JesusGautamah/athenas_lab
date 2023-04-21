@@ -5,9 +5,8 @@
 # Home controller
 class HomeController < ApplicationController
   def index
-    @public_chats = Chat.where(public: true).order(created_at: :desc).last(10)
-    @public_images = @public_chats.map(&:messages).flatten.map(&:gen_images)
-    @public_images = @public_images.map { |i| i.first(3) }.flatten.last(3)
+    @public_chats = Chat.where(public: true).order(created_at: :desc).paginate(page: params[:page], per_page: 3)
+    @public_images = Chat.where(public: true).last(3).flat_map { |chat| chat.messages.flat_map(&:gen_images) }.last(3)
     @awesome_chatgpt_actors = AwesomeChatgptActors::CastControl.actors
   end
 
