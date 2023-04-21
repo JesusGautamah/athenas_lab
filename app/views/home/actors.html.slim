@@ -1,14 +1,16 @@
-.grid.grid-cols-2
-  #primary-col.flex-col.w-full
-    .card.mb-2.rounded
-      .card-header
-        .card-header-title
-          h1 Last Public Chats
-          hr/
-          br/
-    - if @awesome_chatgpt_actors.any?
-      - @awesome_chatgpt_actors.each do |actor|
-        .card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
-          .card-header
-            .card-header-title.text-white
-              strong =< actor
+#primary-col.w-full
+  .card.mb-2.rounded
+    .card-header
+      .card-header-title
+        h1 Last Public Chats
+        hr/
+        br/
+  - if @awesome_chatgpt_actors.any?
+    - @awesome_chatgpt_actors.each do |actor|
+      .card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
+        .card-header
+          .card-header-title.text-white
+            strong =< actor
+        .card-body
+          .card-content
+            == AwesomeChatgptActors::Actor.new(role: actor, language: 'pt').prompt

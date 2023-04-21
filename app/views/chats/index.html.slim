@@ -2,10 +2,18 @@
 .card.mb-2.rounded.px-5.py-3
   .card-header
     .card-header-title
-      h1 Chats
+      .pull-left
+        h1 Chats
+      .pull-right
+        = link_to "New Chat", new_chat_path, class: "button px-3 py-2 rounded text-white bg-black hover_bg-gray-700 absolute right-12 top-12 mt-6"
       hr/
       br/
 
+
+.card.mb-2.rounded.px-5.py-3.card-page-title
+  .card-header
+    .card-header-title.text-white
+      = will_paginate @chats
 #chats
   - @chats.each do |chat|
     .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
@@ -22,5 +30,8 @@
           i.fas.fa-comments.text-white.mr-2
 
           = link_to "view", chat, class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
-= will_paginate @chats
-= link_to "New chat", new_chat_path, class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
+.card.mb-2.rounded.px-5.py-3.card-page-title
+  .card-header
+    .card-header-title.text-white
+      = will_paginate @chats
+
