@@ -42,3 +42,5 @@
 /.Trash-0
 /app/python/*.json
 /draws/*.drawio
+/redis-data
+/redis-data/*
