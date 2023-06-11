@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_27_212245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,93 +42,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "chat_ads", force: :cascade do |t|
-    t.text "title", null: false
+  create_table "board_projects", force: :cascade do |t|
+    t.integer "chats_count", default: 0, null: false
+    t.string "title", null: false
     t.text "description", null: false
-    t.text "content", null: false
-    t.bigint "chat_id", null: false
+    t.string "markdown"
+    t.string "ipynb"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_ads_on_chat_id"
-  end
-
-  create_table "chat_analytics", force: :cascade do |t|
-    t.bigint "chat_id", null: false
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_analytics_on_chat_id"
-  end
-
-  create_table "chat_books", force: :cascade do |t|
-    t.bigint "chat_id", null: false
-    t.text "title", null: false
-    t.text "description", default: "NOT DEFINED", null: false
-    t.text "author", default: "NOT REGISTERED", null: false
-    t.integer "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_books_on_chat_id"
-  end
-
-  create_table "chat_ideas", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "content", null: false
-    t.bigint "chat_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_ideas_on_chat_id"
-  end
-
-  create_table "chat_names", force: :cascade do |t|
-    t.text "name", default: [], null: false, array: true
-    t.bigint "chat_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_names_on_chat_id"
-  end
-
-  create_table "chat_questions", force: :cascade do |t|
-    t.bigint "chat_id", null: false
-    t.text "question", null: false
-    t.text "answers", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_questions_on_chat_id"
-  end
-
-  create_table "chat_recipes", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.bigint "chat_id", null: false
-    t.text "content", null: false
-    t.text "steps", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_recipes_on_chat_id"
-  end
-
-  create_table "chat_recomendations", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.bigint "chat_id", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_recomendations_on_chat_id"
-  end
-
-  create_table "chat_summaries", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "content", null: false
-    t.bigint "chat_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_chat_summaries_on_chat_id"
+    t.string "file_display_order"
+    t.boolean "public"
+    t.integer "owner_id"
+    t.integer "step_count"
+    t.integer "sleep_seconds"
+    t.integer "current_step_count"
+    t.text "current_step_context"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -146,15 +74,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
-  create_table "code_explanations", force: :cascade do |t|
-    t.text "title"
-    t.bigint "message_id", null: false
-    t.text "description", null: false
-    t.text "code", null: false
-    t.text "explanation", null: false
+  create_table "conductors", force: :cascade do |t|
+    t.bigint "board_project_id", null: false
+    t.text "cast", default: [], array: true
+    t.bigint "scene_id", null: false
+    t.text "system_config"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_code_explanations_on_message_id"
+    t.index ["board_project_id"], name: "index_conductors_on_board_project_id"
+    t.index ["scene_id"], name: "index_conductors_on_scene_id"
   end
 
   create_table "gen_images", force: :cascade do |t|
@@ -165,44 +93,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.index ["message_id"], name: "index_gen_images_on_message_id"
   end
 
-  create_table "gen_spreadsheets", force: :cascade do |t|
-    t.text "title", null: false
-    t.bigint "message_id", null: false
-    t.text "description", null: false
+  create_table "hermetics", force: :cascade do |t|
+    t.text "laws", default: [], array: true
+    t.bigint "scene_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_gen_spreadsheets_on_message_id"
+    t.index ["scene_id"], name: "index_hermetics_on_scene_id"
   end
 
-  create_table "message_ads", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "content", null: false
-    t.bigint "message_id", null: false
+  create_table "memories", force: :cascade do |t|
+    t.bigint "conductor_id", null: false
+    t.text "content"
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_ads_on_message_id"
-  end
-
-  create_table "message_analytics", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "content", null: false
-    t.bigint "message_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_analytics_on_message_id"
-  end
-
-  create_table "message_books", force: :cascade do |t|
-    t.bigint "message_id", null: false
-    t.text "title", null: false
-    t.text "description", default: "NOT DEFINED", null: false
-    t.text "author", default: "NOT REGISTERED", null: false
-    t.integer "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_books_on_message_id"
+    t.text "step_context"
+    t.index ["conductor_id"], name: "index_memories_on_conductor_id"
   end
 
   create_table "message_corrections", force: :cascade do |t|
@@ -214,64 +120,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.index ["message_id"], name: "index_message_corrections_on_message_id"
   end
 
-  create_table "message_ideas", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.bigint "message_id", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_ideas_on_message_id"
-  end
-
-  create_table "message_names", force: :cascade do |t|
-    t.text "name", default: [], null: false, array: true
-    t.bigint "message_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_names_on_message_id"
-  end
-
-  create_table "message_questions", force: :cascade do |t|
-    t.bigint "message_id", null: false
-    t.text "question", null: false
-    t.text "answers", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_questions_on_message_id"
-  end
-
-  create_table "message_recipes", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.bigint "message_id", null: false
-    t.text "content", null: false
-    t.text "steps", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_recipes_on_message_id"
-  end
-
-  create_table "message_recomendations", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.bigint "message_id", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_recomendations_on_message_id"
-  end
-
-  create_table "message_summaries", force: :cascade do |t|
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "content", null: false
-    t.bigint "message_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_message_summaries_on_message_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.integer "role", default: 0, null: false
@@ -279,17 +127,50 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "keywords", default: [], array: true
+    t.text "markdown"
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
-  create_table "parsed_sctructures", force: :cascade do |t|
-    t.bigint "message_id", null: false
-    t.text "title", null: false
-    t.text "description", null: false
-    t.text "gen_structure", null: false
+  create_table "project_chats", force: :cascade do |t|
+    t.bigint "board_project_id", null: false
+    t.bigint "chat_id", null: false
+    t.string "function_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_parsed_sctructures_on_message_id"
+    t.index ["board_project_id"], name: "index_project_chats_on_board_project_id"
+    t.index ["chat_id"], name: "index_project_chats_on_chat_id"
+  end
+
+  create_table "project_users", force: :cascade do |t|
+    t.bigint "board_project_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_project_id"], name: "index_project_users_on_board_project_id"
+    t.index ["user_id"], name: "index_project_users_on_user_id"
+  end
+
+  create_table "scenes", force: :cascade do |t|
+    t.text "past_points", default: [], array: true
+    t.text "initial_point"
+    t.text "actual_point"
+    t.text "objective_point"
+    t.bigint "board_project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_project_id"], name: "index_scenes_on_board_project_id"
+  end
+
+  create_table "submemories", force: :cascade do |t|
+    t.bigint "conductor_id", null: false
+    t.text "step_context"
+    t.text "content"
+    t.integer "step"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "title"
+    t.index ["conductor_id"], name: "index_submemories_on_conductor_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -311,35 +192,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "openai_key"
+    t.integer "gpt_model"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "chat_ads", "chats"
-  add_foreign_key "chat_analytics", "chats"
-  add_foreign_key "chat_books", "chats"
-  add_foreign_key "chat_ideas", "chats"
-  add_foreign_key "chat_names", "chats"
-  add_foreign_key "chat_questions", "chats"
-  add_foreign_key "chat_recipes", "chats"
-  add_foreign_key "chat_recomendations", "chats"
-  add_foreign_key "chat_summaries", "chats"
   add_foreign_key "chats", "users"
-  add_foreign_key "code_explanations", "messages"
+  add_foreign_key "conductors", "board_projects"
+  add_foreign_key "conductors", "scenes"
   add_foreign_key "gen_images", "messages"
-  add_foreign_key "gen_spreadsheets", "messages"
-  add_foreign_key "message_ads", "messages"
-  add_foreign_key "message_analytics", "messages"
-  add_foreign_key "message_books", "messages"
+  add_foreign_key "hermetics", "scenes"
+  add_foreign_key "memories", "conductors"
   add_foreign_key "message_corrections", "messages"
-  add_foreign_key "message_ideas", "messages"
-  add_foreign_key "message_names", "messages"
-  add_foreign_key "message_questions", "messages"
-  add_foreign_key "message_recipes", "messages"
-  add_foreign_key "message_recomendations", "messages"
-  add_foreign_key "message_summaries", "messages"
   add_foreign_key "messages", "chats"
-  add_foreign_key "parsed_sctructures", "messages"
+  add_foreign_key "project_chats", "board_projects"
+  add_foreign_key "project_chats", "chats"
+  add_foreign_key "project_users", "board_projects"
+  add_foreign_key "project_users", "users"
+  add_foreign_key "scenes", "board_projects"
+  add_foreign_key "submemories", "conductors"
 end

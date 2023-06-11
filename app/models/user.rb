@@ -10,8 +10,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :chats, dependent: :destroy
+  has_many :board_projects, foreign_key: :owner_id, dependent: :destroy, inverse_of: :owner
 
   has_one_attached :avatar
+
+  enum :gpt_model, { "gpt-3.5-turbo": 0, "gpt-4": 1 }
 
   attr_accessor :avatar_param
 

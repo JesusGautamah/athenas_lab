@@ -8,7 +8,7 @@ module ApplicationHelper
     end
   end
 
-  def markdown(text)
+  def message_markdown(text)
     code = CodeRayify.new(filter_html: true, hard_wrap: true, link_attributes: { rel: "nofollow", target: "_blank" })
     options = {
       fenced_code_blocks: true,
@@ -34,6 +34,14 @@ module ApplicationHelper
       gh_blockcode: true
     }
     markdown_to_html = Redcarpet::Markdown.new(code, options)
+    text = "Something went wrong" if text.blank?
     markdown_to_html.render(text)
+  end
+
+  def file_markdown(board_project)
+    return unless board_project.md_file.attached?
+
+    file = board_project.md_file.download
+    message_markdown(file)
   end
 end

@@ -49,6 +49,11 @@ input[type="radio"]:checked {
   color: $primary-color;
 }
 
+input[type="number"] {
+  background-color: $primary-neutral-color;
+  color: $primary-text-color;
+}
+
 textarea {
   background-color: $primary-neutral-color;
   color: $primary-text-color;
@@ -58,7 +63,6 @@ textarea {
 select {
   background-color: #d3d3d3;
   color: #000;
-  width: 100%;
 }
 
 select option {

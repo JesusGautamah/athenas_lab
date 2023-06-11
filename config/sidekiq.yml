@@ -1,5 +1,5 @@
 development:
-  :concurrency: 3
+  :concurrency: 5
 
 production:
   :concurrency: 5
@@ -7,4 +7,8 @@ production:
 :max_retries: 1
 
 :queues:
-  - rails_queue
+  - default
+  - mailers
+  - [high_priority, 2]
+  - [low_priority, 3]
+  

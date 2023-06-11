@@ -1,0 +1,10 @@
+h1 Editing project user
+
+== render "form", project_user: @project_user
+
+br
+
+div
+  => link_to "Show this project user", @project_user
+  '|
+  =< link_to "Back to project users", project_users_path

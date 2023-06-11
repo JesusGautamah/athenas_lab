@@ -18,7 +18,7 @@
               strong =< chat.title
           .card-content
             .content
-              == markdown(chat.messages.last.content.truncate(100)) if chat.messages.any?
+              == message_markdown(chat.messages.last.content.truncate(100)) if chat.messages.any?
               br/
           .card-content
             span.text-white =chat.messages.count
@@ -42,7 +42,7 @@
         - next if image.nil?
         .card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
           .card-header
-            .card-header-title.text-white 
+            .card-header-title.text-white
               strong =< image.message.chat.title
           .card-content
             .content[style="height: 200px; overflow: hidden;"]

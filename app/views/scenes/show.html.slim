@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @scene
+
+div
+  => link_to "Edit this scene", edit_scene_path(@scene)
+  '|
+  =< link_to "Back to scenes", scenes_path
+
+  = button_to "Destroy this scene", @scene, method: :delete

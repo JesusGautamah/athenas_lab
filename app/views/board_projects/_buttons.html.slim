@@ -1,0 +1,5 @@
+.card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.text-center.card-message-buttons
+  .card-content
+    .content.grid.grid-cols-4
+      = link_to "Epiphanize", autogpt_path(id: board.id),  class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
+      = link_to "Edit", edit_board_project_path(board), class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"

@@ -1,0 +1,46 @@
+.card.mb-2.rounded.px-5.py-3.text-left.card-message.text-left
+  .card-header
+    .card-header-title
+  .card-content
+    .content
+      = form_for(@board_project, html: {multipart: true}) do |form|
+        - if @board_project.errors.any?
+          div style="color: red"
+            h2 = "#{pluralize(@board_project.errors.count, "error")} prohibited this board_project from being saved:"
+            ul
+              - @board_project.errors.each do |error|
+                li = error.full_message
+        div 
+          = form.label :markdown_params, "README",style: "display: block"
+          = form.file_field :markdown_params
+
+        div
+          = form.label :public
+          = form.check_box :public
+      
+        div
+          = form.label :title, style: "display: block"
+          = form.text_field :title
+      
+        div
+          = form.label :description, style: "display: block"
+          = form.text_area :description
+
+        div 
+          = form.label :step_count, "How many steps?", style: "display: block"
+          = form.number_field :step_count
+
+        div
+          = form.label :sleep_seconds, "How many seconds to sleep between steps?", style: "display: block"
+          = form.number_field :sleep_seconds
+
+        / div
+        /   = form.label :ipynb, style: "display: block"
+        /   = form.file_field :ipynb
+      
+        / div
+        /   = form.label :file_display_order, style: "display: block"
+        /   = form.select :file_display_order, options_for_select(["md/ipynb", "ipynb/md"], @board_project.file_display_order)
+        div
+          = form.submit
+      

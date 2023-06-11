@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @hermetic
+
+div
+  => link_to "Edit this hermetic", edit_hermetic_path(@hermetic)
+  '|
+  =< link_to "Back to hermetics", hermetics_path
+
+  = button_to "Destroy this hermetic", @hermetic, method: :delete

@@ -1,0 +1,11 @@
+div id="#{dom_id board_project}"
+  p
+    strong
+      = board_project.title
+  p
+    =< board_project.description
+
+- if controller.action_name == "show"
+  = render "buttons", board: board_project
+
+

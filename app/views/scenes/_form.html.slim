@@ -1,0 +1,30 @@
+= form_with(model: @scene) do |form|
+  - if @scene.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@scene.errors.count, "error")} prohibited this scene from being saved:"
+      ul
+        - @scene.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :past_points, style: "display: block"
+    = form.text_area :past_points
+
+  div
+    = form.label :initial_point, style: "display: block"
+    = form.text_area :initial_point
+
+  div
+    = form.label :actual_point, style: "display: block"
+    = form.text_area :actual_point
+
+  div
+    = form.label :objective_point, style: "display: block"
+    = form.text_area :objective_point
+
+  div
+    = form.label :board_project_id, style: "display: block"
+    = form.text_field :board_project_id
+
+  div
+    = form.submit

@@ -19,9 +19,9 @@
         div
           = form.label :actor
           = form.select :actor, options_for_select(@awesome_chatgpt_actors)
-        div
-          = form.label :language
-          = form.select :language, options_for_select(@languages)
+        / div
+        /   = form.label :language
+        /   = form.select :language, options_for_select(@languages)
 
         div
           = form.submit

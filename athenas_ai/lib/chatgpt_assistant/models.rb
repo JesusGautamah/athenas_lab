@@ -76,6 +76,10 @@ class Chat < ApplicationRecord
 
   after_create :init_chat_if_actor_provided
 
+  def system_config
+    messages.find_by(role: "system")
+  end
+
   def init_chat_if_actor_provided
     return if actor.nil?
 

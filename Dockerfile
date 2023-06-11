@@ -6,6 +6,11 @@ COPY Gemfile.lock /athenas_lab/Gemfile.lock
 RUN bundle install
 RUN gem install foreman
 
+# Install Python and Tiktoken Library
+
+RUN apt-get install -y python3-pip
+RUN pip3 install tiktoken
+
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

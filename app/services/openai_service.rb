@@ -3,8 +3,8 @@
 require "openai"
 
 class OpenaiService
-  def initialize
-    @client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY", nil))
+  def initialize(api_key)
+    @client = OpenAI::Client.new(access_token: api_key)
   end
   attr_reader :client
 

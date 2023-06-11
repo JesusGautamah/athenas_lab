@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Project chats
+
+#project_chats
+  - @project_chats.each do |project_chat|
+    == render project_chat
+    p
+      = link_to "Show this project chat", project_chat
+
+= link_to "New project chat", new_project_chat_path

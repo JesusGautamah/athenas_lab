@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ChatsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_chat, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_chat, only: %i[show edit update destroy, clean_up_chat_history]
 
   # GET /chats or /chats.json
   def index
@@ -29,6 +29,7 @@ class ChatsController < ApplicationController
 
   # POST /chats or /chats.json
   def create
+    @awesome_chatgpt_actors = AwesomeChatgptActors::CastControl.actors
     @chat = Chat.new(chat_params)
     @chat.user = current_user
 
@@ -64,6 +65,12 @@ class ChatsController < ApplicationController
       format.html { redirect_to chats_url, notice: "Chat was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def clean_up_chat_history
+    return redirect_to root_url unless @chat.user == current_user
+    @chat.messages.destroy_all
+    redirect_to chat_url(@chat), notice: "Chat history was successfully cleaned up."
   end
 
   private

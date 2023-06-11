@@ -1,0 +1,10 @@
+h1 Editing board project
+
+== render "form", board_project: @board_project
+
+br
+
+div
+  => link_to "Show this board project", @board_project
+  '|
+  =< link_to "Back to board projects", board_projects_path

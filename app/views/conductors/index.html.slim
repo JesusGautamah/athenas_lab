@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Conductors
+
+#conductors
+  - @conductors.each do |conductor|
+    == render conductor
+    p
+      = link_to "Show this conductor", conductor
+
+= link_to "New conductor", new_conductor_path

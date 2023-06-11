@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  board_project: one
+  chat: one
+  function_title: MyString
+
+two:
+  board_project: two
+  chat: two
+  function_title: MyString

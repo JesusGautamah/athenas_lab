@@ -1,0 +1,13 @@
+.card.mb-2.rounded.px-5.py-3
+  .card-header
+    .card-header-title
+      h1 == hermetic.scene.board_project.title
+      hr/
+      h1 Hermetic Laws
+      br/
+    - hermetic.laws.each do |law|
+      .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message.text-center
+        .card-header
+          .card-header-title
+              = law
+      br/

@@ -1,0 +1,10 @@
+h1 Editing conductor
+
+== render "form", conductor: @conductor
+
+br
+
+div
+  => link_to "Show this conductor", @conductor
+  '|
+  =< link_to "Back to conductors", conductors_path

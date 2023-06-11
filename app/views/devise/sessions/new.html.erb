@@ -6,18 +6,24 @@
 </div>
 </div>
 
-<div class="card mb-2 border border-gray-700 bg-gray-950 rounded px-5 py-3 card-message">
+<div class="card mb-2 border border-gray-700 bg-gray-950 rounded px-5 py-3 card-message text-center">
   <div class="card-header">
     <div class="card-header-title">
-    
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
+    <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
+    <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
@@ -30,7 +36,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "button px-3 py-2 rounded text-white bg-black hover_bg-gray-700" %>
   </div>
 <% end %>
 

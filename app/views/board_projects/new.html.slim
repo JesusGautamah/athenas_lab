@@ -1,0 +1,11 @@
+.card.mb-2.rounded.px-5.py-3.card-page-title
+  .card-header
+    .card-header-title.text-white
+      h1 New board project
+
+== render "form", board_project: @board_project
+
+br
+
+div
+  = link_to "Back to board projects", board_projects_path

@@ -22,7 +22,7 @@
           = link_to chat.title, chat
       .card-content
         .content
-          == markdown(chat.messages.last.content.truncate(100)) if chat.messages.any?
+          == message_markdown(chat.messages.last.content.truncate(100)) if chat.messages.any?
         br/
         .card-content.text-center
           span.text-white =chat.messages.count
