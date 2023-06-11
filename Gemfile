@@ -76,6 +76,8 @@ group :test do
   gem "webdrivers"
 end
 
+gem "active_model_serializers"
+gem "activerecord-import"
 gem "awesome_chatgpt_actors"
 gem "aws-sdk-polly"
 gem "aws-sdk-s3"
@@ -90,5 +92,3 @@ gem "ruby-openai"
 gem "sidekiq"
 gem "slim-rails"
 gem "will_paginate"
-gem "activerecord-import"
-gem "active_model_serializers"

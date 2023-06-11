@@ -1,6 +1,6 @@
 class ConductorsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_conductor, only: %i[ show edit update destroy clean_memories ]
+  before_action :set_conductor, only: %i[show edit update destroy clean_memories]
 
   # GET /conductors or /conductors.json
   def index
@@ -8,8 +8,7 @@ class ConductorsController < ApplicationController
   end
 
   # GET /conductors/1 or /conductors/1.json
-  def show
-  end
+  def show; end
 
   # GET /conductors/new
   def new
@@ -17,8 +16,7 @@ class ConductorsController < ApplicationController
   end
 
   # GET /conductors/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /conductors or /conductors.json
   def create
@@ -70,6 +68,7 @@ class ConductorsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_conductor
       @conductor = Conductor.find(params[:id])

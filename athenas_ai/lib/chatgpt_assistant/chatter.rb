@@ -67,8 +67,10 @@ module ChatgptAssistant
                          content: mess.content }
                      end
                    end
-        messages.each { |mess| raise "Invalid content for: #{mess.id}" if mess[:content].nil? }
-        messages.each { |mess| raise "Invalid role for: #{mess.id}" if mess[:role].nil? }
+        messages.each { |mess|
+          raise "Invalid content for: #{mess.id}" if mess[:content].nil?
+          raise "Invalid role for: #{mess.id}" if mess[:role].nil?
+        }
         {
           model: "gpt-3.5-turbo",
           messages: messages,

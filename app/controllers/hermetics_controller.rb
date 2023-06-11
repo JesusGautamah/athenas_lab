@@ -1,5 +1,5 @@
 class HermeticsController < ApplicationController
-  before_action :set_hermetic, only: %i[ show edit update destroy ]
+  before_action :set_hermetic, only: %i[show edit update destroy]
 
   # GET /hermetics or /hermetics.json
   def index
@@ -7,8 +7,7 @@ class HermeticsController < ApplicationController
   end
 
   # GET /hermetics/1 or /hermetics/1.json
-  def show
-  end
+  def show; end
 
   # GET /hermetics/new
   def new
@@ -16,8 +15,7 @@ class HermeticsController < ApplicationController
   end
 
   # GET /hermetics/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /hermetics or /hermetics.json
   def create
@@ -58,6 +56,7 @@ class HermeticsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_hermetic
       @hermetic = Hermetic.find(params[:id])
