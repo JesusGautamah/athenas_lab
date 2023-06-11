@@ -6,7 +6,7 @@ require_relative "chatgpt_assistant/audio_synthesis"
 require_relative "chatgpt_assistant/chatter"
 require_relative "chatgpt_assistant/version"
 require_relative "chatgpt_assistant/config"
-require_relative "chatgpt_assistant/models"
+# require_relative "chatgpt_assistant/models"
 require_relative "chatgpt_assistant/error"
 require_relative "bots/application_bot"
 require_relative "bots/telegram_bot"
@@ -23,7 +23,6 @@ require "faraday"
 require "bcrypt"
 
 module ChatgptAssistant
-  # This class is responsible for initializing the Chatgpt Assistant
   class Main
     def initialize(mode)
       @mode = mode

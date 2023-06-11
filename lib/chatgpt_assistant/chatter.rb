@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "faraday"
-require_relative "models"
+# require_relative "models"
 
 module ChatgptAssistant
   # This is the Chat Ai class
@@ -17,7 +17,7 @@ module ChatgptAssistant
       @response = request(message)
       @json = JSON.parse(response.body)
 
-      return no_response_error if json["choices"].empty?
+      return no_response_error if json["choices"].nil? || json["choices"].empty?
       return bot_offline_error if response.status != 200
 
       text = json["choices"][0]["message"]["content"]
@@ -63,12 +63,17 @@ module ChatgptAssistant
                      [{ role: "user", content: message }]
                    else
                      messages.map do |mess|
-                       { role: mess.role,
-                         content: mess.content }
+                      role = mess.role
+                      role = "user" if mess.role == "actor"
+                      role = "assistant" if mess.role == "athenas_ai"
+                      { role: role,
+                        content: mess.content }
                      end
                    end
-        messages.each { |mess| raise "Invalid content for: #{mess.id}" if mess[:content].nil? }
-        messages.each { |mess| raise "Invalid role for: #{mess.id}" if mess[:role].nil? }
+        messages.each do |mess|
+          raise "Invalid content for: #{mess.id}" if mess[:content].nil?
+          raise "Invalid role for: #{mess.id}" if mess[:role].nil?
+        end
         {
           model: "gpt-3.5-turbo",
           messages: messages,

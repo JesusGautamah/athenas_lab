@@ -21,12 +21,12 @@ class Message < ApplicationRecord
   end
 
   def broadcast_to_board_project_if_exists
-    if chat.board_projects.count.positive?
-      chat.board_projects.each do |board_project|
-        project_chats = board_project.chats
-        chats_with_messages = project_chats.map { |project_chat| { chat: project_chat, messages: project_chat.messages.last(5) } }
-        ActionCable.server.broadcast("board_project_#{board_project.id}_channel", { chats: chats_with_messages })
-      end
+    return unless chat.board_projects.count.positive?
+
+    chat.board_projects.each do |board_project|
+      project_chats = board_project.chats
+      chats_with_messages = project_chats.map { |project_chat| { chat: project_chat, messages: project_chat.messages.last(5) } }
+      ActionCable.server.broadcast("board_project_#{board_project.id}_channel", { chats: chats_with_messages })
     end
   end
 

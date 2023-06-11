@@ -30,4 +30,20 @@ class User < ApplicationRecord
     self.password_salt = BCrypt::Engine.generate_salt
     self.password_hash = BCrypt::Engine.hash_secret(password_hash, password_salt)
   end
+
+  def current_chat
+    chats.find(current_chat_id)
+  end
+
+  def last_chat
+    chats.last
+  end
+
+  def chat_by_title(title)
+    chats.find_by(title: title)
+  end
+
+  def chat_history
+    current_chat.messages.last(10).map { |m| "#{m.role}: #{m.content}\nat: #{m.created_at}" }
+  end
 end

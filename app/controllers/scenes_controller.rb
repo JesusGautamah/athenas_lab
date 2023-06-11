@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ScenesController < ApplicationController
-  before_action :set_scene, only: %i[ show edit update destroy ]
+  before_action :set_scene, only: %i[show edit update destroy]
 
   # GET /scenes or /scenes.json
   def index
@@ -7,8 +9,7 @@ class ScenesController < ApplicationController
   end
 
   # GET /scenes/1 or /scenes/1.json
-  def show
-  end
+  def show; end
 
   # GET /scenes/new
   def new
@@ -16,8 +17,7 @@ class ScenesController < ApplicationController
   end
 
   # GET /scenes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /scenes or /scenes.json
   def create
@@ -58,6 +58,7 @@ class ScenesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_scene
       @scene = Scene.find(params[:id])

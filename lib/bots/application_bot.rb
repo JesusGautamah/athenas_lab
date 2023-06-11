@@ -18,6 +18,7 @@ require_relative "jobs/voice_connect_job"
 require_relative "services/register_service"
 require_relative "services/new_chat_service"
 require_relative "services/voice_connect_service"
+require_relative "../../config/environment"
 
 module ChatgptAssistant
   # This class is responsible to contain the shared attributes and methods
@@ -53,7 +54,7 @@ module ChatgptAssistant
     attr_accessor :msg, :evnt, :bot, :audio_url, :visitor, :user, :chat, :chat_id
 
     def chatter
-      @chatter ||= Chatter.new(openai_api_key)
+      @chatter ||= Chatter.new(user.openai_key)
     end
   end
 end

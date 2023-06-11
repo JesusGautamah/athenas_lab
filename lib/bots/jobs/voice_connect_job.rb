@@ -5,7 +5,7 @@ require "sidekiq"
 module ChatgptAssistant
   # This class is responsible to background the voice connect service
   class VoiceConnectJob
-    include Sidekiq::Worker
+    include Sidekiq::Job
 
     def perform(channel_id)
       VoiceConnectService.new(channel_id).call

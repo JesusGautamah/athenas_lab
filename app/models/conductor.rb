@@ -10,12 +10,12 @@ class Conductor < ApplicationRecord
 
   def load_config
     system_config = {
-          role: "system",
-          content: "Help for the #{board_project.title}.
+      role: "system",
+      content: "Help for the #{board_project.title}.
           Your objective is to reach #{scene.objective_point}.
           Send only one instruction step per request and use the format:
           'Hey {Actor Name}, can you please {what u want to know or help with}?'"
-        }
+    }
 
     self.system_config = system_config
   end

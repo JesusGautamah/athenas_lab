@@ -20,7 +20,7 @@ module ChatgptAssistant
       bot.voice_connect(channel)
       bot.join
       true
-    rescue StandardError => e
+    rescue StandardError
       # Rails.logger.debug e.message
       # e.backtrace.each { |line| Rails.logger.debug line }
       false

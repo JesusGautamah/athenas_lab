@@ -8,19 +8,18 @@ class AutogptService
     @python_folder = "#{Rails.root}/app/python/"
     @tiktoken = "#{python_folder}tik.py"
     add_actors_to_cast
-    @default_memory = Memory.create!(conductor: conductor, content: conductor.config_content, role: 'system')
+    @default_memory = Memory.create!(conductor: conductor, content: conductor.config_content, role: "system")
     @steps = board_project.step_count
     @sleep_sec = board_project.sleep_seconds
     @step = 0
   end
 
-
   def call
     actors.each_with_index do |actor, index|
       steps.times do |memory_time|
-        puts "Step: #{memory_time} - Actor: #{actor.inspect}"
-        puts "Actor Index: #{index} - Global Step: #{@step}"
-        conductor_memory_process unless @step == 0 && index == 0
+        Rails.logger.debug { "Step: #{memory_time} - Actor: #{actor.inspect}" }
+        Rails.logger.debug { "Actor Index: #{index} - Global Step: #{@step}" }
+        conductor_memory_process unless @step.zero? && index.zero?
         conductor_context_process(actor)
         actor_chat = board_project.chats.find(actor[:chat_id])
         epiphany_instruction = conductor_epiphany_process(actor_chat)
@@ -33,8 +32,8 @@ class AutogptService
       conductor.memories.where.not(role: "system").destroy_all
     end
   rescue StandardError => e
-    puts e.message
-    e.backtrace.each { |line| puts line }
+    Rails.logger.debug e.message
+    e.backtrace.each { |line| Rails.logger.debug line }
   end
 
   private
@@ -83,14 +82,15 @@ class AutogptService
           model: "gpt-3.5-turbo",
           temperature: 1,
           messages: messages,
-          max_tokens: 600,
+          max_tokens: 600
         }
       )
       raise "OpenAI API Error: #{resp["error"]["message"]}" if resp["error"]
+
       resp.dig("choices", 0, "message")
     rescue StandardError => e
-      puts e.message
-      e.backtrace.each { |line| puts line }
+      Rails.logger.debug e.message
+      e.backtrace.each { |line| Rails.logger.debug line }
     end
 
     def add_actors_to_cast
@@ -108,19 +108,21 @@ class AutogptService
 
       text = generate_small_text(old_memory)
 
-      Submemory.create!(conductor: conductor, title: text["title"], content: text["description"], step: @step, step_context: "conductor_memory_process") unless Submemory.find_by(title: text["title"], conductor: conductor)
+      Submemory.create!(conductor: conductor, title: text["title"], content: text["description"], step: @step, step_context: "conductor_memory_process") unless Submemory.find_by(title: text["title"],
+                                                                                                                                                                                  conductor: conductor)
       memory = "This is your memory, so remember that you already: \n#{text["title"]}\n#{text["description"]}"
-      Memory.create!(conductor: conductor, content: memory, role: 'system', step_context: "conductor_memory_process")
+      Memory.create!(conductor: conductor, content: memory, role: "system", step_context: "conductor_memory_process")
     end
 
     def conductor_context_process(actor)
       message = conductor.generate_instructions(actor[:actor_name])
-      Memory.create!(conductor: conductor, content: message[:content], role: 'user', step_context: "conductor_context_process")
+      Memory.create!(conductor: conductor, content: message[:content], role: "user", step_context: "conductor_context_process")
     end
 
     def generate_small_text(old_memory)
       sleep(sleep_sec)
-      return "NO MESSAGES" if old_memory.nil? || old_memory.empty?
+      return "NO MESSAGES" if old_memory.blank?
+
       req = { role: "user", content: "generate a small description to be added as a kanban already done card title: \n#{old_memory.join("\n")}
       \nreturn me this kanban card in a json, do not send nothing else, do not add invalid characters to json parsing,\n
       the description has to be a report resume of the conclusion in the response, do not send ' or `, this json has to be like {title:, description:}" }
@@ -129,7 +131,7 @@ class AutogptService
           model: "gpt-3.5-turbo",
           temperature: 1,
           messages: [req],
-          max_tokens: 600,
+          max_tokens: 600
         }
       ).dig("choices", 0, "message", "content").to_s
       JSON.parse(generated_text)
@@ -139,10 +141,10 @@ class AutogptService
 
     def conductor_epiphany_process(actor_chat)
       memories = conductor.memories.map { |mem| { role: mem.role, content: mem.content }	}
-      memories.each { |mem| puts mem.inspect }
+      memories.each { |mem| Rails.logger.debug mem.inspect }
       epiphany = request(memories).map { |k, v| { k.to_sym => v } }.reduce({}, :merge)
       Message.create!(content: epiphany[:content], chat: actor_chat, role: :athenas_ai)
-      @new_conductor_memory = Memory.create!(conductor: conductor, content: epiphany[:content], role: 'assistant', step_context: "conductor_epiphany_process")
+      @new_conductor_memory = Memory.create!(conductor: conductor, content: epiphany[:content], role: "assistant", step_context: "conductor_epiphany_process")
       epiphany[:role] = "user"
       epiphany
     end
@@ -156,7 +158,7 @@ class AutogptService
       actor_memory = request(actor[:memory]).map { |k, v| { k.to_sym => v } }.reduce({}, :merge)
       Message.create!(content: actor_memory[:content], chat: actor_chat, role: :actor)
       actor[:memory] << actor_memory
-      @new_actor_memory = Memory.create!(conductor: conductor, content: actor_memory[:content], role: 'user', step_context: "actor_new_memory_process")
+      @new_actor_memory = Memory.create!(conductor: conductor, content: actor_memory[:content], role: "user", step_context: "actor_new_memory_process")
       actor[:actor_response_count] += 1
     end
 end
