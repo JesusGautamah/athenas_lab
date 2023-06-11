@@ -49,7 +49,7 @@ module Users
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
       devise_parameter_sanitizer.permit(:account_update, keys: %i[password_hash password_salt name
-                                                                  avatar_param])
+                                                                  avatar_param gpt_model openai_key])
     end
 
     # The path used after sign up.

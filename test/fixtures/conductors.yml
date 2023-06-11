@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  board_project: one
+  memory: MyText
+  cast: MyText
+  scene: one
+  subconcious: MyText
+
+two:
+  board_project: two
+  memory: MyText
+  cast: MyText
+  scene: two
+  subconcious: MyText

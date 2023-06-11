@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  conductor: one
+  step_context: MyText
+  content: MyText
+  step: 1
+
+two:
+  conductor: two
+  step_context: MyText
+  content: MyText
+  step: 1

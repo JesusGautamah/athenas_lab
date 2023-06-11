@@ -1,0 +1,33 @@
+.card.mb-2.rounded.px-5.py-3
+  .card-header
+    .card-header-title
+      h1 == scene.board_project.title
+      hr/
+      h1 Project Scenario
+      br/
+.card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+  .card-header
+    .card-header-title
+      strong Past points:
+  .card-content
+    .content
+      - scene.past_points.each do |past_point|
+        = past_point
+.card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+  .card-header
+    .card-header-title
+      p
+        strong Initial point:
+        =< scene.initial_point
+.card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+  .card-header
+    .card-header-title
+      p
+        strong Actual point:
+        =< scene.actual_point
+.card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+  .card-header
+    .card-header-title
+      p
+        strong Objective point:
+        =< scene.objective_point

@@ -1,10 +1,23 @@
-.card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.text-center.card-message-buttons
+.card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.card-message-buttons
   .card-content
-    .content.grid.grid-cols-4
-      = link_to "Edit this message", edit_chat_message_path(message.chat, message),  class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
-      = button_to "Extract Keywords from this message", message_extract_keywords_path(id: message.id), class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
-      = button_to "Generate image from this message", message_generate_image_path(id: message.id), class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700" 
-      = button_to "Correct this message", message_correct_grammar_path(id: message.id), class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
-    br/
-    .content.grid.grid-cols-4
-      = button_to "Destroy this message", message, method: :delete, data: { confirm: "Are you sure?" },  class: "button text-white rounded px-3 py-2 mr-2 bg-black hover_bg-gray-700"
+    .content
+      .flex.justify-between
+        .button
+          = button_to edit_chat_message_path(message.chat, message),  class: "text-white rounded px-3 py-2 bg-black hover_bg-gray-700", method: :get do
+            i.fas.fa-edit
+        
+        .button
+          = button_to message_extract_keywords_path(id: message.id), class: "text-white rounded px-3 py-2 bg-black hover_bg-gray-700" do
+            i.fas.fa-key
+        
+        .button
+          = button_to message_generate_image_path(id: message.id), class: "text-white rounded px-3 py-2 bg-black hover_bg-gray-700" do
+            i.fas.fa-image
+
+        .button
+          = button_to message_correct_grammar_path(id: message.id), class: "button text-white rounded px-3 py-2 bg-black hover_bg-gray-700 fas fa-check" do
+            i.fas.fa-check
+
+        .button
+          = button_to message, method: :delete, data: { confirm: "Are you sure?" },  class: "button text-white rounded px-3 py-2 bg-black hover_bg-gray-700" do
+            i.fas.fa-trash-alt

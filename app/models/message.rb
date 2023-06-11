@@ -2,9 +2,33 @@
 
 class Message < ApplicationRecord
   belongs_to :chat
-  enum role: { user: 0, assistant: 1 }
+  enum role: { user: 0, assistant: 1, actor: 2, system: 3, athenas_ai: 4 }
   has_many :gen_images, dependent: :destroy
   has_many :message_corrections, dependent: :destroy
+  before_save :markdown_message
+  after_create_commit :broadcast_message
+  after_create_commit :broadcast_to_board_project_if_exists
+
+  include ActionView::Helpers
+  include ApplicationHelper
+
+  def markdown_message
+    self.markdown = message_markdown(content)
+  end
+
+  def broadcast_message
+    ActionCable.server.broadcast("chat_#{chat.id}_channel", { messages: [self] })
+  end
+
+  def broadcast_to_board_project_if_exists
+    if chat.board_projects.count.positive?
+      chat.board_projects.each do |board_project|
+        project_chats = board_project.chats
+        chats_with_messages = project_chats.map { |project_chat| { chat: project_chat, messages: project_chat.messages.last(5) } }
+        ActionCable.server.broadcast("board_project_#{board_project.id}_channel", { chats: chats_with_messages })
+      end
+    end
+  end
 
   def catch_keywords
     keywords = openai_service.extract_keywords(content)
@@ -47,6 +71,6 @@ class Message < ApplicationRecord
   private
 
     def openai_service
-      OpenaiService.new
+      OpenaiService.new(user.openai_key)
     end
 end

@@ -43,6 +43,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :openai_key, "OpenAI API Key" %><br />
+    <%= f.text_field :openai_key, autocomplete: "openai_key" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gpt_model, "OpenAI GPT model" %><br />
+    <%= f.select :gpt_model, options_for_select(["gpt-3.5-turbo", "gpt-4"], selected: resource.gpt_model) %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %><br><i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>

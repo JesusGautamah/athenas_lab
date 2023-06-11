@@ -10,8 +10,8 @@ div id="#{dom_id message}"
             =< message.created_at.strftime("%d/%m/%Y %H:%M")
   .card-content
     .content
-      == markdown(message.content)
+      == message.markdown
       br/
-      - if message.user == current_user
-        = render partial: "messages/buttons", locals: { message: message }
+      / - if message.user == current_user
+      /   = render partial: "messages/buttons", locals: { message: message }
 

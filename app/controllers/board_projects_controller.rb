@@ -105,6 +105,6 @@ class BoardProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def board_project_params
-      params.require(:board_project).permit(:chats_count, :title, :description, :markdown, :ipynb)
+      params.require(:board_project).permit(:chats_count, :title, :description, :markdown_params, :ipynb, :step_count, :sleep_seconds, :md_file, :public, :file_display_order)
     end
 end

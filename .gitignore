@@ -40,3 +40,5 @@
 /.ipynb_checkpoints
 /.ipynb_checkpoints/*
 /.Trash-0
+/app/python/*.json
+/draws/*.drawio

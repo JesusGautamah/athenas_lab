@@ -1,16 +1,11 @@
 div id="#{dom_id board_project}"
   p
-    strong Chats count:
-    =< board_project.chats_count
+    strong
+      = board_project.title
   p
-    strong Title:
-    =< board_project.title
-  p
-    strong Description:
     =< board_project.description
-  p
-    strong avaiable actors
-    =< board_project.cast_actors
 
 - if controller.action_name == "show"
   = render "buttons", board: board_project
+
+

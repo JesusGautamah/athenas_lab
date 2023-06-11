@@ -3,5 +3,5 @@
     .card-header-title
       strong Grammar Correction
       - @message.message_corrections.each do |message_correction|
-        == "#{markdown(JSON.parse(message_correction.content)[0])}"
+        == "#{message_markdown(JSON.parse(message_correction.content)[0])}"
       br/

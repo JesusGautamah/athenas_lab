@@ -1,5 +1,5 @@
 development:
-  :concurrency: 3
+  :concurrency: 5
 
 production:
   :concurrency: 5
@@ -8,3 +8,7 @@ production:
 
 :queues:
   - default
+  - mailers
+  - [high_priority, 2]
+  - [low_priority, 3]
+  

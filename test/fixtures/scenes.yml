@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  past_points: MyText
+  initial_point: MyText
+  actual_point: MyText
+  objective_point: MyText
+  board_project: one
+
+two:
+  past_points: MyText
+  initial_point: MyText
+  actual_point: MyText
+  objective_point: MyText
+  board_project: two

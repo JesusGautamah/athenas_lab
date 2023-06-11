@@ -1,16 +1,5 @@
 version: "3.3"
 services:
-  redis:
-    image: redis:6.2.1-alpine
-    restart: always
-    ports:
-      - 6380:6379
-    volumes:
-      - ./data:/data
-    command: redis-server
-    networks:
-      - athenas_lab
-
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && foreman start -f Procfile.dev"
@@ -29,8 +18,6 @@ services:
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - .:/athenas_lab
-    depends_on:
-      - redis
     env_file:
       - .env
     networks:

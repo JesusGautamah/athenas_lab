@@ -5,8 +5,10 @@ class Chat < ApplicationRecord
   validates :actor, presence: true
   validates :title, uniqueness: { scope: :user_id }
   has_many :messages, dependent: :destroy
+  has_many :project_chats, dependent: :destroy
+  has_many :board_projects, through: :project_chats
   before_save :load_prompt
-  after_create :first_message
+  # after_create :first_message
   before_update :load_prompt
   enum status: { open: 0, closed: 1 }
 

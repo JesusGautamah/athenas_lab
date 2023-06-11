@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Hermetics
+
+#hermetics
+  - @hermetics.each do |hermetic|
+    == render hermetic
+    p
+      = link_to "Show this hermetic", hermetic
+
+= link_to "New hermetic", new_hermetic_path

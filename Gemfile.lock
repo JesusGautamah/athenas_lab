@@ -46,6 +46,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.10.13)
+      actionpack (>= 4.1, < 7.1)
+      activemodel (>= 4.1, < 7.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (7.0.4.3)
       activesupport (= 7.0.4.3)
       globalid (>= 0.3.6)
@@ -54,6 +59,8 @@ GEM
     activerecord (7.0.4.3)
       activemodel (= 7.0.4.3)
       activesupport (= 7.0.4.3)
+    activerecord-import (1.4.1)
+      activerecord (>= 4.2)
     activestorage (7.0.4.3)
       actionpack (= 7.0.4.3)
       activejob (= 7.0.4.3)
@@ -104,6 +111,8 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    case_transform (0.2)
+      activesupport
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.0)
@@ -143,6 +152,7 @@ GEM
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
     json (2.6.3)
+    jsonapi-renderer (0.2.2)
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -313,6 +323,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_model_serializers
+  activerecord-import
   awesome_chatgpt_actors
   aws-sdk-polly
   aws-sdk-s3

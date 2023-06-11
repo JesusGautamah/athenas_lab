@@ -1,0 +1,26 @@
+.card.mb-2.rounded
+  .card-header
+    .card-header-title
+      == render @conductor
+      hr/
+      br/
+
+#conductor.flex.flex-col
+  - @conductor.submemories.each do |submem|
+    .card.mb-2.border.border-gray-700.bg-gray-900.rounded.px-5.py-3.text-left.card-message
+      .card-header
+        .card-header-title.grid.grid-cols-2
+          .text-left
+            p = "#{submem.step}: "
+        = submem.title
+        br/
+        = submem.content
+
+div
+  => link_to "Edit this conductor", edit_conductor_path(@conductor)
+  '|
+  =< link_to "Back to conductors", conductors_path
+
+  = button_to "Destroy this conductor", @conductor, method: :delete
+
+  = button_to "Clean Memories", clean_memories_path(id: @conductor), method: :delete
