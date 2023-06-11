@@ -17,7 +17,7 @@ module ChatgptAssistant
       @response = request(message)
       @json = JSON.parse(response.body)
 
-      return no_response_error if json["choices"].nil? || json["choices"].empty?
+      return no_response_error if json["choices"].blank?
       return bot_offline_error if response.status != 200
 
       text = json["choices"][0]["message"]["content"]
@@ -63,11 +63,11 @@ module ChatgptAssistant
                      [{ role: "user", content: message }]
                    else
                      messages.map do |mess|
-                      role = mess.role
-                      role = "user" if mess.role == "actor"
-                      role = "assistant" if mess.role == "athenas_ai"
-                      { role: role,
-                        content: mess.content }
+                       role = mess.role
+                       role = "user" if mess.role == "actor"
+                       role = "assistant" if mess.role == "athenas_ai"
+                       { role: role,
+                         content: mess.content }
                      end
                    end
         messages.each do |mess|
