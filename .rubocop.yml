@@ -7,6 +7,7 @@ AllCops:
    - 'athenas_ai/**/*'
    - 'db/schema.rb'
    - 'db/migrate/*'
+   - 'bin/bundle'
 
 Style/Documentation:
   Enabled: false
@@ -39,7 +40,7 @@ Metrics/AbcSize:
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: indent
-  
+
 Layout/IndentationWidth:
   Width: 2
 
