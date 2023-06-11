@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatChannel < ApplicationCable::Channel
   # include ActionView::Helpers
 
@@ -26,17 +28,17 @@ class ChatChannel < ApplicationCable::Channel
 
   def fetch_chat_messages(data)
     chat_id = data["chat_id"]
-    if chat = Chat.find(chat_id)
+    if (chat = Chat.find(chat_id))
       messages = chat.messages.order(:id).paginate(page: params[:page], per_page: 5)
       ActionCable.server.broadcast("chat_#{chat_id}_channel", html(messages))
     else
-      ActionCable.server.broadcast("chat_channel", {error: "Chat not found"})
+      ActionCable.server.broadcast("chat_channel", { error: "Chat not found" })
     end
   end
 
   def html(messages)
     ChatsController.render(
-      partial: 'chats/chat_messages',
+      partial: "chats/chat_messages",
       locals: { messages: messages }
     )
   end

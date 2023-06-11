@@ -8,6 +8,7 @@ AllCops:
    - 'db/schema.rb'
    - 'db/migrate/*'
    - 'bin/bundle'
+   - 'test/**/*'
 
 Style/Documentation:
   Enabled: false

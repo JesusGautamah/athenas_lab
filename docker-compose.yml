@@ -22,9 +22,50 @@ services:
       - .env
     networks:
       - athenas_lab
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+  telegram:
+    build: .
+    command: bash -c "bundle exec bin/bot telegram"
+    volumes:
+      - .:/athenas_lab
+    environment:
+      POSTGRES_HOST: db
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+  discord:
+    build: .
+    command: bash -c "bundle exec bin/bot discord"
+    volumes:
+      - .:/athenas_lab
+    environment:
+      POSTGRES_HOST: db
+    env_file:
+      - .env
+    networks:
+      - athenas_lab
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - athenas_lab
 volumes:
   redis:
   postgres:
 networks:
   athenas_lab:
-    external: true
+    name: athenas_lab

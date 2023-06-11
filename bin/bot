@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../lib/chatgpt_assistant"
+
+puts "Starting Chatgpt Assistant"
+puts "Bot Type: #{ARGV[0]}"
+puts "Mode: #{ENV.fetch("MODE", nil)}"
+case ARGV[0]
+when "telegram"
+  ChatgptAssistant::Main.new("telegram").start
+when "discord"
+  ChatgptAssistant::Main.new("discord").start
+when "sidekiq"
+  # start sidekiq with the lib/chatgpt_assistant/sidekiq.rb
+  system "bundle exec sidekiq -r ./lib/chatgpt_assistant/sidekiq.rb -C ./lib/chatgpt_assistant/sidekiq.yml -q register new_chat"
+when "migrate"
+  ChatgptAssistant::Config.new.migrate
+end

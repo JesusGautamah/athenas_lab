@@ -43,4 +43,6 @@
 /app/python/*.json
 /draws/*.drawio
 /redis-data
+/redis_data
 /redis-data/*
+/redis_data/*

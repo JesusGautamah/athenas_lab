@@ -76,6 +76,8 @@ group :test do
   gem "webdrivers"
 end
 
+gem "active_model_serializers"
+gem "activerecord-import"
 gem "awesome_chatgpt_actors"
 gem "aws-sdk-polly"
 gem "aws-sdk-s3"
@@ -90,5 +92,39 @@ gem "ruby-openai"
 gem "sidekiq"
 gem "slim-rails"
 gem "will_paginate"
-gem "activerecord-import"
-gem "active_model_serializers"
+
+gem "bcrypt"
+
+gem "rake", "~> 13.0"
+
+gem "rspec", "~> 3.12", group: :test
+
+gem "rspec-rails", "~> 6.0", group: :test
+
+gem "simplecov", "~> 0.21", group: :test
+
+gem "vcr", "~> 6.0", group: :test
+
+gem "shoulda-matchers", "~> 5.3", group: :test
+
+gem "factory_bot_rails", "~> 6.0", group: :test
+
+gem "faker", "~> 2.0", group: :test
+
+gem "database_cleaner", "~> 2.0", group: :test
+
+gem "dotenv", "~> 2.0", group: :test
+
+gem "rubocop-rspec", "~> 2.20"
+
+gem "telegram-bot-ruby", "~> 0.16"
+
+gem "discordrb", "~> 3.4"
+
+gem "sidekiq-scheduler"
+
+gem "streamio-ffmpeg"
+
+gem "ibm_watson"
+
+gem "sidekiq-expiring-jobs"
