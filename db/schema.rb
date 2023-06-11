@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
+ActiveRecord::Schema[7.0].define(version: 20_230_426_002_030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index %w[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -39,7 +41,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index %w[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "board_projects", force: :cascade do |t|
+    t.integer "chats_count", default: 0, null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "markdown"
+    t.string "ipynb"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_display_order"
+    t.boolean "public"
+    t.integer "owner_id"
   end
 
   create_table "chat_ads", force: :cascade do |t|
@@ -155,6 +170,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_code_explanations_on_message_id"
+  end
+
+  create_table "errors", force: :cascade do |t|
+    t.integer "chat_id"
+    t.integer "user_id"
+    t.text "message", default: "", null: false
+    t.text "backtrace", default: [], null: false, array: true
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "gen_images", force: :cascade do |t|
@@ -292,6 +316,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.index ["message_id"], name: "index_parsed_sctructures_on_message_id"
   end
 
+  create_table "project_chats", force: :cascade do |t|
+    t.bigint "board_project_id", null: false
+    t.bigint "chat_id", null: false
+    t.string "function_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_project_id"], name: "index_project_chats_on_board_project_id"
+    t.index ["chat_id"], name: "index_project_chats_on_chat_id"
+  end
+
+  create_table "project_users", force: :cascade do |t|
+    t.bigint "board_project_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_project_id"], name: "index_project_users_on_board_project_id"
+    t.index ["user_id"], name: "index_project_users_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "telegram_id"
@@ -313,6 +357,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "visitors", force: :cascade do |t|
+    t.string "telegram_id", limit: 100
+    t.string "discord_id", limit: 100
+    t.integer "platform", default: 0, null: false
+    t.string "name", null: false
+    t.integer "current_user_id", default: 0
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -342,4 +396,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_013653) do
   add_foreign_key "message_summaries", "messages"
   add_foreign_key "messages", "chats"
   add_foreign_key "parsed_sctructures", "messages"
+  add_foreign_key "project_chats", "board_projects"
+  add_foreign_key "project_chats", "chats"
+  add_foreign_key "project_users", "board_projects"
+  add_foreign_key "project_users", "users"
 end

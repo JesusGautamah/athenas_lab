@@ -1,0 +1,17 @@
+.card.mb-2.rounded.px-5.py-3.card-page-title
+  .card-header
+    .card-header-title.text-white
+      h1 Select a Chat to add to this Board Project
+      hr/
+      h1 == @board_project.title
+
+#chats
+  - @chats.each do |chat|
+    .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+      .card-header
+        .card-header-title
+          == render chat
+          p
+          = link_to "Show this chat", chat
+          = button_to "Add this chat to this board project", add_chat_to_board_project_path(id: @board_project.id, chat_id: chat.id)
+

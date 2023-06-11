@@ -3,6 +3,7 @@
 class Chat < ApplicationRecord
   belongs_to :user
   validates :actor, presence: true
+  validates :title, uniqueness: { scope: :user_id }
   has_many :messages, dependent: :destroy
   before_save :load_prompt
   after_create :first_message
@@ -14,6 +15,8 @@ class Chat < ApplicationRecord
   end
 
   def first_message
+    return if actor == "No Config"
+
     actor = AwesomeChatgptActors::Actor.new(role: self.actor, language: "pt")
     message = Message.new(content: actor.prompt, role: "user")
     message.chat = self

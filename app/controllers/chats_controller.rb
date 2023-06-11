@@ -29,6 +29,7 @@ class ChatsController < ApplicationController
 
   # POST /chats or /chats.json
   def create
+    @awesome_chatgpt_actors = AwesomeChatgptActors::CastControl.actors
     @chat = Chat.new(chat_params)
     @chat.user = current_user
 

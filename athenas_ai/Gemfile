@@ -61,3 +61,6 @@ gem "aws-sdk-polly"
 gem "awesome_chatgpt_actors"
 
 gem "sidekiq-expiring-jobs"
+
+# include action cable
+gem "actioncable", "~> 6.1.4"

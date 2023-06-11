@@ -1,0 +1,22 @@
+= form_with(model: @project_chat) do |form|
+  - if @project_chat.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@project_chat.errors.count, "error")} prohibited this project_chat from being saved:"
+      ul
+        - @project_chat.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :board_project_id, style: "display: block"
+    = form.text_field :board_project_id
+
+  div
+    = form.label :chat_id, style: "display: block"
+    = form.text_field :chat_id
+
+  div
+    = form.label :function_title, style: "display: block"
+    = form.text_field :function_title
+
+  div
+    = form.submit

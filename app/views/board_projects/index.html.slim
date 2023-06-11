@@ -1,0 +1,23 @@
+.card.mb-2.rounded.px-5.py-3
+  .card-header
+    .card-header-title
+      .pull-left
+        h1 Board Projects
+      .pull-right
+        = link_to "New Board", new_board_project_path, class: "button px-3 py-2 rounded text-white bg-black hover_bg-gray-700 absolute right-12 top-12 mt-6"
+      hr/
+      br/
+
+.card.mb-2.rounded.px-5.py-3.card-page-title
+  .card-header
+    .card-header-title.text-white
+      = will_paginate @board_projects
+
+#board_projects
+  - @board_projects.each do |board_project|
+    .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+      .card-header
+        .card-header-title
+          == render board_project
+          p
+          = link_to "Show this board project", board_project

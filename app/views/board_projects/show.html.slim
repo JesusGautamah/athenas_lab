@@ -1,0 +1,28 @@
+.card.mb-2.rounded.px-5.py-3
+  .card-header
+    .card-header-title
+      .pull-left
+        h1 == @board_project.title
+      .pull-right
+        = link_to "Add Chat", select_chat_to_add_path(id: @board_project.id), class: "button px-3 py-2 rounded text-white bg-black hover_bg-gray-700 absolute right-12 top-12 mt-6"
+      hr/
+      br/
+
+
+#board_project
+  .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message
+    .card-header
+      .card-header-title
+        == render @board_project
+
+
+#chats.flex.justify-between
+  - @board_project.chats.order(created_at: :desc).each do |chat|
+    .card.mb-2.border.border-gray-700.bg-gray-950.rounded.px-5.py-3.card-message.text-center
+      .card-header
+        .card-header-title
+          == render chat
+          p
+            = link_to "Show this chat", chat
+          p
+            = button_to "Remove this chat from this board project", remove_chat_from_board_project_path(id: @board_project.id, chat_id: chat.id), data: { confirm: "Are you sure?" }

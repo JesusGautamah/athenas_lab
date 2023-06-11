@@ -3,6 +3,10 @@ require: rubocop-rails
 AllCops:
   TargetRubyVersion: 2.6
   NewCops: enable
+  Exclude:
+   - 'athenas_ai/**/*'
+   - 'db/schema.rb'
+   - 'db/migrate/*'
 
 Style/Documentation:
   Enabled: false
@@ -50,9 +54,3 @@ Metrics/PerceivedComplexity:
 
 Metrics/CyclomaticComplexity:
   Max: 10
-
-Rails/I18nLocaleTexts:
-  Enabled: false
-
-Rails/LexicallyScopedActionFilter:
-  Enabled: false

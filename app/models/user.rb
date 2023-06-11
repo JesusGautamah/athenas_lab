@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :chats, dependent: :destroy
+  has_many :board_projects, foreign_key: :owner_id, dependent: :destroy, inverse_of: :owner
 
   has_one_attached :avatar
 

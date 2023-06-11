@@ -1,0 +1,10 @@
+h1 Editing project chat
+
+== render "form", project_chat: @project_chat
+
+br
+
+div
+  => link_to "Show this project chat", @project_chat
+  '|
+  =< link_to "Back to project chats", project_chats_path

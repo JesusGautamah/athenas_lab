@@ -26,6 +26,7 @@ module ChatgptAssistant
       text
     rescue StandardError => e
       Error.create(message: e.message, backtrace: e.backtrace)
+      Error.create(message: message, backtrace: json.to_s)
       error_message
     end
 
@@ -66,6 +67,8 @@ module ChatgptAssistant
                          content: mess.content }
                      end
                    end
+        messages.each { |mess| raise "Invalid content for: #{mess.id}" if mess[:content].nil? }
+        messages.each { |mess| raise "Invalid role for: #{mess.id}" if mess[:role].nil? }
         {
           model: "gpt-3.5-turbo",
           messages: messages,

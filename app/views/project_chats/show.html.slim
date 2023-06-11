@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @project_chat
+
+div
+  => link_to "Edit this project chat", edit_project_chat_path(@project_chat)
+  '|
+  =< link_to "Back to project chats", project_chats_path
+
+  = button_to "Destroy this project chat", @project_chat, method: :delete
