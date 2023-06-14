@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'will_paginate/array'
+require "will_paginate/array"
 
 class ChatChannel < ApplicationCable::Channel
   # include ActionView::Helpers
