@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'will_paginate/array'
+
 class ChatChannel < ApplicationCable::Channel
   # include ActionView::Helpers
 
@@ -16,20 +18,10 @@ class ChatChannel < ApplicationCable::Channel
     stop_all_streams
   end
 
-  # def fetch_user_auth
-  #   data = {
-  #     id: current_user.id,
-  #     email: current_user.email,
-  #     username: current_user.username,
-  #   }
-
-  #   ActionCable.server.broadcast("chat_channel", {user: data})
-  # end
-
   def fetch_chat_messages(data)
     chat_id = data["chat_id"]
     if (chat = Chat.find(chat_id))
-      messages = chat.messages.order(:id).paginate(page: params[:page], per_page: 5)
+      messages = chat.messages.order(:id).paginate(page: data["page"], per_page: 5)
       ActionCable.server.broadcast("chat_#{chat_id}_channel", html(messages))
     else
       ActionCable.server.broadcast("chat_channel", { error: "Chat not found" })
@@ -39,7 +31,7 @@ class ChatChannel < ApplicationCable::Channel
   def html(messages)
     ChatsController.render(
       partial: "chats/chat_messages",
-      locals: { messages: messages }
+      locals: { messages: messages, user: current_user.id }
     )
   end
 end
